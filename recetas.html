@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriDePP</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <img src="Assets/Logo 2 1.png" alt="Logo" style="height:80px;">
+        <h1>NutriDePP Recetas</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="#buscador">Buscar</a>
+    </nav>
+
+    <main class="container">
+        <section id="buscador-section">
+            <h2>Encuentra tu plan ideal</h2>
+            <input type="text" id="buscador" placeholder="Busca por ingrediente o nombre (ej. Pollo)..." 
+                   style="width: 100%; padding: 1rem; border-radius: 8px; border: 2px solid #556B2F; margin-bottom: 2rem;">
+        </section>
+
+        <section class="features" id="contenedor-recetas">
+            <div class="feature receta-card" data-nombre="Ensalada Protein">
+                <h3>Ensalada Protein</h3>
+                <p>Pollo, espinaca y quinoa.</p>
+                <button class="btn-ver">Ver Receta</button>
+            </div>
+            <div class="feature receta-card" data-nombre="Batido Energético">
+                <h3>Batido Energético</h3>
+                <p>Avena, plátano y leche de almendras.</p>
+                <button class="btn-ver">Ver Receta</button>
+            </div>
+            <div class="feature receta-card" data-nombre="Tacos de Atún">
+                <h3>Tacos de Atún</h3>
+                <p>Atún fresco, palta y tortilla integral.</p>
+                <button class="btn-ver">Ver Receta</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -68,3 +68,29 @@ footer {
 @media (max-width: 600px) {
     .features { flex-direction: column;}
 }
+ /* Estilo para el input de búsqueda */
+#buscador:focus {
+    outline: none;
+    border-color: #FFA726;
+    box-shadow: 0 0 8px rgba(255, 167, 38, 0.5);
+}
+
+/* Botón dentro de la receta */
+.btn-ver {
+    background: #556B2F;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-ver:hover {
+    background: #212121;
+}
+
+/* Clase para ocultar recetas que no coincidan */
+.hidden {
+    display: none;
+}
