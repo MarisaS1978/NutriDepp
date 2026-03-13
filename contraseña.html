@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña - NutriDePP</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #f0f2f5;">
+
+    <div class="login-card">
+        <header>
+            <h2 style="color: #556B2F;">¿Olvidaste tu contraseña?</h2>
+            <p>Introduce tu correo y te enviaremos los pasos para recuperarla.</p>
+        </header>
+
+        <form id="recoverForm">
+            <div class="input-group">
+                <label for="email-recover">Correo Electrónico</label>
+                <input type="email" id="email-recover" placeholder="tu-correo@ejemplo.com" required>
+            </div>
+
+            <button type="submit" class="btn-login">Enviar instrucciones</button>
+        </form>
+
+        <div id="mensajeExito" style="display: none; margin-top: 20px; color: #556B2F; font-weight: bold;">
+            ¡Listo! Revisa tu bandeja de entrada. 📧
+        </div>
+
+        <div class="login-footer">
+            <a href="login.html" style="color: #7C4DFF; text-decoration: none;">← Volver al Login</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('recoverForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Simulación de envío
+            document.getElementById('recoverForm').style.display = 'none';
+            document.getElementById('mensajeExito').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

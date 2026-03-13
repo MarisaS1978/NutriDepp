@@ -187,3 +187,141 @@ footer {
     border-color: #7C4DFF;
     color: #fff;
 }
+
+/* Tarjeta de Login */
+.login-card {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Grupos de Input */
+.input-group {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #556B2F;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box; /* Importante para el ancho total */
+    font-size: 1rem;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #FFA726;
+    box-shadow: 0 0 5px rgba(255, 167, 38, 0.3);
+}
+
+/* Botón de Login */
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    background: #FFA726; /* Naranja de tu paleta */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-login:hover {
+    background: #fb8c00;
+}
+
+.login-footer {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.login-footer a {
+    color: #556B2F;
+    font-weight: bold;
+}
+
+select:focus {
+    outline: none;
+    border-color: #FFA726;
+}
+
+/* Efecto suave al pasar el mouse por el botón de registro */
+.btn-login {
+    transition: all 0.3s ease;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columnas para los días */
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.day-header {
+    background: #556B2F;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+    font-weight: bold;
+}
+
+.meal-slot {
+    background: #f9f9f9;
+    border: 1px dashed #ccc;
+    min-height: 80px;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.meal-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.meal-content {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #556B2F;
+}
+
+.meal-content.empty {
+    color: #bbb;
+    cursor: pointer;
+}
+
+/* Ajuste para móviles */
+@media (max-width: 768px) {
+    .calendar-grid {
+        grid-template-columns: 1fr; /* Una sola columna en celulares */
+    }
+}
+
+nav a[onclick="cerrarSesion()"] {
+    background-color: #d32f2f !important; /* Rojo */
+}
+
+nav a[onclick="cerrarSesion()"]:hover {
+    background-color: #b71c1c !important; /* Rojo más oscuro */
+    color: white;
+}

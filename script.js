@@ -71,3 +71,36 @@ btnTodas.addEventListener('click', () => {
         receta.style.display = "block";
     });
 });
+
+document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const emailIngresado = document.getElementById('email').value;
+    const passIngresada = document.getElementById('password').value;
+
+    // BUSCAR DATOS: Obtenemos el usuario que guardamos en el registro
+    const datosGuardados = localStorage.getItem('usuarioRegistrado');
+
+    if (datosGuardados) {
+        const usuario = JSON.parse(datosGuardados); // Convertimos el texto a objeto otra vez
+
+        // COMPARAR: ¿Coinciden los datos?
+        if (emailIngresado === usuario.email && passIngresada === usuario.password) {
+            alert('¡Bienvenido de nuevo a NutriDePP!');
+            // Guardamos que el usuario está "logueado" actualmente
+            sessionStorage.setItem('sesionActiva', 'true'); 
+            window.location.href = 'index.html';
+        } else {
+            alert('Correo o contraseña incorrectos. Inténtalo de nuevo.');
+        }
+    } else {
+        alert('No hay ninguna cuenta registrada con este correo.');
+    }
+});
+
+function cerrarSesion() {
+    if (confirm("¿Quieres cerrar sesión?")) {
+        sessionStorage.removeItem('sesionActiva'); // Borra el estado de logueado
+        window.location.href = 'login.html';
+    }
+}
