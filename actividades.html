@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades - NutriDePP</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <img src="Assets/Logo 2 1.png" alt="Logo NutriDePP" class="logo-header">
+            <h1>Rendimiento y Energía</h1>
+            <p>Monitorea kilómetros, tiempo y calorías quemadas</p>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="calendario.html">Calendario</a>
+            <a href="recetas.html">Recetas</a>
+            <a href="actividades.html" class="active">Actividades</a>
+            <a href="contacto.html">Contacto</a>
+        </div>
+    </nav>
+
+    <main class="container animacion-entrada">
+
+        <section id="resumen-visual" style="margin-bottom: 40px;">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                <h2>Análisis de Rendimiento</h2>
+
+                <div class="filtros-tiempo"
+                    style="display: flex; background: #eee; padding: 5px; border-radius: 10px; gap: 5px;">
+                    <button onclick="actualizarPeriodo('diario')" class="btn-filtro">Día</button>
+                    <button onclick="actualizarPeriodo('semanal')" class="btn-filtro activo">Semana</button>
+                    <button onclick="actualizarPeriodo('mensual')" class="btn-filtro">Mes</button>
+                    <button onclick="actualizarPeriodo('anual')" class="btn-filtro">Año</button>
+                </div>
+            </div>
+
+            <div
+                style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <canvas id="graficoRendimiento" height="120"></canvas>
+            </div>
+        </section>
+
+        <div class="features">
+            <section id="registro" style="flex: 1; min-width: 300px;">
+                <h2>Registrar Sesión</h2>
+                <form id="formActividad"
+                    style="display: flex; flex-direction: column; gap: 15px; background: white; padding: 20px; border-radius: 12px;">
+                    <div class="input-group">
+                        <label>Actividad</label>
+                        <select id="tipoEjercicio"
+                            style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd;">
+                            <option value="8">Running (Correr)</option>
+                            <option value="6">Ciclismo</option>
+                            <option value="4">Caminata rápida</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <div class="input-group" style="flex: 1; min-width: 120px;">
+                            <label>Tiempo (min)</label>
+                            <input type="number" id="duracion" placeholder="Ej: 45" required
+                                style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                        </div>
+                        <div class="input-group" style="flex: 1; min-width: 120px;">
+                            <label>Distancia (km)</label>
+                            <input type="number" step="0.1" id="distancia" placeholder="Ej: 5.5" required
+                                style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-login" style="background: #7C4DFF;">Guardar Entrenamiento</button>
+                </form>
+            </section>
+
+            <section id="historial" style="flex: 1; min-width: 300px;">
+                <h2>Entrenamientos de Hoy</h2>
+                <div id="listaActividades">
+                    <p style="color: #777;">No hay sesiones registradas.</p>
+                </div>
+                <div id="totalesHoy"
+                    style="margin-top: 20px; font-weight: bold; color: #556B2F; border-top: 2px solid #eee; padding-top: 10px; font-size: 0.9rem;">
+                    Hoy: <span id="valKm">0</span> km | <span id="valMin">0</span> min | <span id="valCal"
+                        style="color: #FFA726;">0 kcal</span>
+                </div>
+            </section>
+        </div>
+
+        <section id="descarga-app" class="animacion-entrada"
+            style="padding: 50px 20px; background: #ffffff; border: 1px solid #eee; border-radius: 20px; margin-top: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+            <div
+                style="max-width: 800px; margin: 0 auto; display: flex; align-items: flex-start; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 280px; text-align: left;">
+                    <h2 style="color: #556B2F; margin-bottom: 10px;">Llevá NutriDePP a todos lados</h2>
+                    <p style="color: #666; margin-bottom: 25px;">Escaneá el código para empezar tu cambio hoy mismo.</p>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <a href="#" class="btn-descarga"
+                            style="background: #000; color: white; padding: 8px 15px; border-radius: 8px; text-decoration: none; display: flex; align-items: center; gap: 10px; width: 170px;">
+                            <i class="fa-brands fa-apple" style="font-size: 1.5rem;"></i>
+                            <div style="text-align: left;">
+                                <small style="display: block; font-size: 0.55rem; line-height: 1;">Consíguelo en
+                                    el</small>
+                                <strong style="font-size: 0.85rem;">App Store</strong>
+                            </div>
+                        </a>
+                        <a href="#" class="btn-descarga"
+                            style="background: #000; color: white; padding: 8px 15px; border-radius: 8px; text-decoration: none; display: flex; align-items: center; gap: 10px; width: 170px;">
+                            <i class="fa-brands fa-google-play" style="font-size: 1.3rem;"></i>
+                            <div style="text-align: left;">
+                                <small style="display: block; font-size: 0.55rem; line-height: 1;">DISPONIBLE EN</small>
+                                <strong style="font-size: 0.85rem;">Google Play</strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div
+                    style="flex: 0; text-align: center; background: #f9f9f9; padding: 20px; border-radius: 15px; border: 2px dashed #ddd; margin-top: 40px;">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://nutridepp.com"
+                        alt="QR Code" style="width: 120px; height: 120px; display: block; margin: 0 auto;">
+                    <p style="margin-top: 10px; font-size: 0.8rem; color: #7C4DFF; font-weight: bold;">¡ESCANEAME!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // DATOS PARA LOS FILTROS
+        const datosGrafico = {
+            diario: { labels: ['06:00', '09:00', '12:00', '15:00', '18:00', '21:00'], km: [0, 5, 0, 0, 3.2, 0], cal: [0, 350, 0, 0, 210, 0] },
+            semanal: { labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'], km: [5, 0, 8, 4, 7, 10, 0], cal: [400, 0, 650, 320, 580, 850, 0] },
+            mensual: { labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4'], km: [25, 32, 18, 40], cal: [1800, 2400, 1500, 3100] },
+            anual: { labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul'], km: [80, 95, 110, 70, 0, 0, 0], cal: [6000, 7200, 8500, 5400, 0, 0, 0] }
+        };
+
+        // CONFIGURACIÓN INICIAL DEL GRÁFICO
+        const ctx = document.getElementById('graficoRendimiento').getContext('2d');
+        const graficoRendimiento = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: datosGrafico.semanal.labels,
+                datasets: [
+                    {
+                        label: 'Kilómetros',
+                        data: datosGrafico.semanal.km,
+                        borderColor: '#7C4DFF',
+                        backgroundColor: 'rgba(124, 77, 255, 0.1)',
+                        fill: true,
+                        yAxisID: 'y',
+                    },
+                    {
+                        label: 'Calorías',
+                        data: datosGrafico.semanal.cal,
+                        borderColor: '#FFA726',
+                        borderDash: [5, 5],
+                        fill: false,
+                        yAxisID: 'y1',
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'KM' } },
+                    y1: { type: 'linear', display: true, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'Kcal' } }
+                }
+            }
+        });
+
+        // FUNCIONALIDAD DE LOS FILTROS
+        function actualizarPeriodo(periodo) {
+            document.querySelectorAll('.btn-filtro').forEach(btn => btn.classList.remove('activo'));
+            event.target.classList.add('activo');
+
+            graficoRendimiento.data.labels = datosGrafico[periodo].labels;
+            graficoRendimiento.data.datasets[0].data = datosGrafico[periodo].km;
+            graficoRendimiento.data.datasets[1].data = datosGrafico[periodo].cal;
+            graficoRendimiento.update();
+        }
+
+        // LÓGICA DEL FORMULARIO
+        const form = document.getElementById('formActividad');
+        const lista = document.getElementById('listaActividades');
+        let totalKm = 0, totalMin = 0, totalCal = 0;
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const met = parseFloat(document.getElementById('tipoEjercicio').value);
+            const min = parseInt(document.getElementById('duracion').value);
+            const km = parseFloat(document.getElementById('distancia').value);
+            const nombreAct = document.getElementById('tipoEjercicio').options[document.getElementById('tipoEjercicio').selectedIndex].text;
+            const cal = Math.round(met * 70 * (min / 60));
+
+            totalKm += km; totalMin += min; totalCal += cal;
+            if (lista.innerText.includes("No hay")) lista.innerHTML = "";
+
+            // Busca esta parte en tu <script> y reemplázala:
+            const card = document.createElement('div');
+            card.className = "actividad-card"; // Usamos la clase del CSS
+            card.innerHTML = `
+    <div>
+        <strong style="display: block; color: var(--verde-oliva);">${nombreAct}</strong>
+        <small style="color: #666;">${km} km en ${min} min</small>
+    </div>
+    <div style="text-align: right;">
+        <span style="color: var(--naranja); font-weight: bold; display: block;">${cal} kcal</span>
+    </div>
+`;
+            lista.appendChild(card);
+
+            document.getElementById('valKm').innerText = totalKm.toFixed(1);
+            document.getElementById('valMin').innerText = totalMin;
+            document.getElementById('valCal').innerText = totalCal + " kcal";
+
+            graficoRendimiento.data.datasets[0].data[1] += km;
+            graficoRendimiento.data.datasets[1].data[1] += cal;
+            graficoRendimiento.update();
+            form.reset();
+        });
+    </script>
+
+    <style>
+        .btn-filtro {
+            border: none;
+            background: transparent;
+            padding: 6px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .btn-filtro.activo {
+            background: white;
+            color: #7C4DFF;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</body>
+
+</html>

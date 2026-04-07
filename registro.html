@@ -5,79 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - NutriDePP</title>
     <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #f0f2f5; padding: 20px 0;">
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: linear-gradient(135deg, #f0f2f5 0%, #e2e8f0 100%); margin: 0; padding: 20px 0;">
 
-    <div class="login-card" style="max-width: 500px;"> <header>
-            <h2 style="color: #556B2F;">Crea tu cuenta</h2>
-            <p>Únete a la comunidad de NutriDePP</p>
+    <div class="login-card animacion-entrada" style="max-width: 450px;">
+        <header style="background: transparent; text-align: center; margin-bottom: 20px;">
+            <img src="Assets/Logo 2 1.png" alt="Logo" style="height: 70px; margin-bottom: 10px;">
+            <h2 style="color: #556B2F; margin: 0;">Únete a NutriDePP</h2>
+            <p style="color: #666; font-size: 0.9rem;">Comienza tu transformación hoy</p>
         </header>
 
         <form id="registroForm">
             <div class="input-group">
-                <label for="nombre">Nombre Completo</label>
+                <label for="nombre"><i class="fa-solid fa-user"></i> Nombre Completo</label>
                 <input type="text" id="nombre" placeholder="Tu nombre" required>
             </div>
 
             <div class="input-group">
-                <label for="email-reg">Correo Electrónico</label>
-                <input type="email" id="email-reg" placeholder="correo@ejemplo.com" required>
+                <label for="email"><i class="fa-solid fa-envelope"></i> Correo Electrónico</label>
+                <input type="email" id="email" placeholder="correo@ejemplo.com" required>
             </div>
 
-            <div style="display: flex; gap: 1rem;">
-                <div class="input-group" style="flex: 1;">
-                    <label for="pass-reg">Contraseña</label>
-                    <input type="password" id="pass-reg" placeholder="••••••••" required>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <div class="input-group" style="flex: 1; min-width: 160px;">
+                    <label for="password"><i class="fa-solid fa-lock"></i> Contraseña</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
                 </div>
-                <div class="input-group" style="flex: 1;">
-                    <label for="pass-confirm">Confirmar</label>
-                    <input type="password" id="pass-confirm" placeholder="••••••••" required>
+                <div class="input-group" style="flex: 1; min-width: 160px;">
+                    <label for="confirm"><i class="fa-solid fa-shield-check"></i> Confirmar</label>
+                    <input type="password" id="confirm" placeholder="••••••••" required>
                 </div>
             </div>
 
             <div class="input-group">
-                <label for="objetivo">Tu objetivo principal</label>
-                <select id="objetivo" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd;">
+                <label for="objetivo"><i class="fa-solid fa-bullseye"></i> Tu objetivo principal</label>
+                <select id="objetivo" style="width: 100%; padding: 12px; border: 2px solid #f0f0f0; border-radius: 12px; background: #fafafa; font-family: inherit;">
                     <option value="perder">Perder peso / Definición</option>
-                    <option value="mantener">Mantener salud</option>
+                    <option value="mantener">Mantener peso saludable</option>
                     <option value="ganar">Ganar masa muscular</option>
                     <option value="rendimiento">Rendimiento deportivo</option>
                 </select>
             </div>
 
-            <button type="submit" class="btn-login" style="background: #7C4DFF;">Registrarme</button>
+            <button type="submit" class="btn-login" style="width: 100%; margin-top: 15px; background: #7C4DFF;">
+                CREAR CUENTA
+            </button>
         </form>
 
-        <div class="login-footer">
-            <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+        <div class="login-footer" style="text-align: center; margin-top: 20px;">
+            <p style="color: #444;">¿Ya tienes cuenta? <a href="login.html" style="color: #556B2F; font-weight: bold; text-decoration: none;">Inicia sesión</a></p>
+            <div style="margin-top: 15px;">
+                <a href="index.html" style="color: #7C4DFF; text-decoration: none; font-size: 0.9rem;">← Volver al inicio</a>
+            </div>
         </div>
     </div>
 
     <script>
-    document.getElementById('registroForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const email = document.getElementById('email-reg').value;
-    const pass = document.getElementById('pass-reg').value;
-    const p2 = document.getElementById('pass-confirm').value;
+        document.getElementById('registroForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const pass = document.getElementById('password').value;
+            const confirm = document.getElementById('confirm').value;
 
-    if (pass !== p2) {
-        alert("Las contraseñas no coinciden.");
-        return;
-    }
+            if (pass !== confirm) {
+                alert('Las contraseñas no coinciden.');
+                return;
+            }
 
-    // GUARDAR DATOS: Guardamos un objeto con la info del usuario
-    const usuario = {
-        email: email,
-        password: pass
-    };
+            const usuario = {
+                nombre: document.getElementById('nombre').value,
+                email: document.getElementById('email').value,
+                password: pass,
+                objetivo: document.getElementById('objetivo').value
+            };
 
-    // Lo guardamos en LocalStorage convertido a texto
-    localStorage.setItem('usuarioRegistrado', JSON.stringify(usuario));
-
-    alert('¡Cuenta creada con éxito! Ahora puedes iniciar sesión.');
-    window.location.href = 'login.html'; // Nos manda al login
-});
+            localStorage.setItem('usuarioRegistrado', JSON.stringify(usuario));
+            alert('¡Cuenta creada con éxito! Ahora puedes iniciar sesión.');
+            window.location.href = 'login.html';
+        });
     </script>
 </body>
 </html>

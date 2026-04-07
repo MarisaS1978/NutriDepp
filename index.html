@@ -4,61 +4,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NutriDePP</title>
+    <title>NutriDePP - Alimentación y Deporte</title>
     <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
-    <header>
-        <img src="Assets/Logo 2 1.png" alt="Logo de la app" style="height:150px; vertical-align: middle;">
-        <h1>NutriDePP</h1>
-        <p>Salud y deporte en un solo lugar</p>
+    <header class="main-header">
+        <div class="header-content">
+            <img src="Assets/Logo 2 1.png" alt="Logo NutriDePP" class="logo-header">
+            <h1>NutriDePP</h1>
+            <p>Salud y deporte en un solo lugar</p>
+        </div>
     </header>
-    <nav>
-        <a href="login.html">Login</a>
-        <a href="index.html">Inicio</a>
-        <a href="index.html#contacto">Contacto</a>
-        <a href="#descarga">Descarga</a>
-        <a href="javascript:void(0)" onclick="cerrarSesion()" style="background-color: #d32f2f;">Cerrar Sesión</a>
 
+    <nav class="main-nav">
+        <div class="nav-links">
+            <a href="index.html" class="active">Inicio</a>
+            <a href="recetas.html">Recetas</a>
+            <a href="calendario.html">Calendario</a>
+            <a href="actividades.html">Actividades</a>
+            <a href="contacto.html">Contacto</a>
+        </div>
+
+        <div class="nav-auth">
+            <a href="login.html" class="btn-auth-outline">Login</a>
+            <a href="javascript:void(0)" onclick="cerrarSesion()" class="btn-salir">Salir</a>
+        </div>
     </nav>
-    <main class="container">
+
+    <main class="container animacion-entrada">
+
         <section id="funcionalidades">
-            <h2>Funcionalidades principales</h2>
-            <div class="features">
+    <h2 class="section-title">¿Qué quieres hacer hoy?</h2>
+    <div class="features">
 
-                <div class="feature">
-                    <h3>Recetas</h3>
-                    <p>Planes nutricionales a tu medida.</p>
-                    <a href="recetas.html" class="btn-link">Explorar recetas</a>
+        <div class="feature">
+            <i class="fa-solid fa-utensils"></i>
+            <h3>Recetas</h3>
+            <p>Planes nutricionales inteligentes a tu medida.</p>
+            <a href="recetas.html" class="feature-btn btn-violeta">Explorar</a>
+        </div>
+
+        <div class="feature">
+            <i class="fa-solid fa-calendar-check"></i>
+            <h3>Calendario</h3>
+            <p>Organiza tus comidas y metas semanales.</p>
+            <a href="calendario.html" class="feature-btn btn-violeta">Mi Agenda</a>
+        </div>
+
+        <div class="feature">
+            <i class="fa-solid fa-person-running"></i>
+            <h3>Actividades</h3>
+            <p>Seguimiento en tiempo real de tu rendimiento.</p>
+            <a href="actividades.html" class="feature-btn btn-violeta">Entrenar</a>
+        </div>
+
+    </div>
+</section>
+
+        <section id="descarga" class="download-section animacion-entrada">
+            <div class="download-content">
+                <div class="download-text">
+                    <h2>Llevá NutriDePP en tu bolsillo</h2>
+                    <p>Accede a tus planes desde cualquier lugar. Sincroniza tus entrenamientos y recetas al instante.</p>
+
+                    <div class="app-buttons">
+                        <a href="#" class="btn-store">
+                            <i class="fa-brands fa-apple"></i>
+                            <span><small>Consíguelo en el</small> <strong>App Store</strong></span>
+                        </a>
+
+                        <a href="#" class="btn-store">
+                            <i class="fa-brands fa-google-play"></i>
+                            <span><small>DISPONIBLE EN</small> <strong>Google Play</strong></span>
+                        </a>
+                    </div>
                 </div>
 
-                <div class="feature">
-                    <h3>Calendario</h3>
-                    <p>Organiza tus comidas semanales.</p>
-                    <a href="calendario.html" class="btn-link">Ver mi agenda</a>
+                <div class="qr-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://nutridepp.com&bgcolor=fdfdfd"
+                        alt="QR Code NutriDePP">
+                    <p class="qr-label">ESCANEAME</p>
                 </div>
-
-                <div class="feature">
-                    <h3>Actividades</h3>
-                    <p>Seguimiento de tu quema calórica.</p>
-                    <a href="actividades.html" class="btn-link">Ir a entrenar</a>
-                </div>
-
             </div>
         </section>
-        <section id="descarga">
-            <h2>¡Descarga la app!</h2>
-            <p>Botón o link de descarga aquí — iOS / Android / Web</p>
-        </section>
-        <section id="contacto">
-            <h2>Contacto</h2>
-            <p>Tu correo, redes o formulario.</p>
+
+        <section id="contacto-cta">
+            <h2>¿Tienes dudas?</h2>
+            <p>Estamos aquí para acompañarte en tu transformación.</p>
+            <a href="contacto.html" class="link-destacado">Escríbenos ahora</a>
         </section>
     </main>
-    <footer>
-        &copy; 2025 NutriDepp · Alimentación Inteligente · Todos los derechos reservados
+
+    <footer class="main-footer">
+        <p>&copy; 2026 NutriDePP · Alimentación Inteligente · Buenos Aires, Argentina</p>
+        <div class="social-links">
+            <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 

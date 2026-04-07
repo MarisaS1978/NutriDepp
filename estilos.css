@@ -1,327 +1,719 @@
-body {
-    font-family: 'Segoe UI', Arial, sans-serif;
+/* --- 1. VARIABLES Y BASE --- */
+:root {
+    --verde-oliva: #556B2F;
+    --violeta: #7C4DFF;
+    --naranja: #FFA726;
+    --gris-fondo: #F6F6F6;
+    --texto-oscuro: #212121;
+    --blanco: #ffffff;
+    --rojo: #d32f2f;
+    --rojo-fav: #FF5252;
+    --sombra: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+* {
     margin: 0;
     padding: 0;
-    background: #F6F6F6;
-    color: #212121;
+    box-sizing: border-box;
 }
-header {
-    background: #556B2F;
-    color: #fff;
-    padding: 2rem;
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: var(--gris-fondo);
+    color: var(--texto-oscuro);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- 2. HEADER Y LOGO --- */
+.main-header {
+    background: var(--verde-oliva);
+    color: var(--blanco);
+    padding: 4rem 1rem;
     text-align: center;
 }
-nav {
-    background: #7C4DFF;
-    padding: 1rem;
-    text-align: center;
-}
-nav a {
-    color: #fff;
-    background: #556B2F;
-    border-radius: 6px;
-    padding: 0.3rem 1rem;
-    margin: 0 1rem;
-    font-weight: bold;
-    text-decoration: none;
-    transition: background 0.3s;
-}
-nav a:hover {
-    background: #FFA726;
-    color: #212121;
-}
-.container {
-    max-width: 900px;
-    margin: 2rem auto;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    border-radius: 12px;
-    padding: 2rem;
-}
-h1{
-    color:#FFA726
-}
-h2 {
-    color: #556B2F;
-}
-.features {
-    display: flex;
-    gap: 1.5rem;
-    margin: 2rem 0;
-    flex-wrap: wrap;
-}
-.feature {
-    flex: 1 1 240px;
-    background: #FFA726;
-    color: #212121;
-    padding: 1rem;
-    border-radius: 9px;
-    text-align: center;
-}
-footer {
-    background: #556B2F;
-    color: #fff;
-    text-align: center;
-    padding: 2rem 0;
-    margin-top: 2rem;
-}
-@media (max-width: 600px) {
-    .features { flex-direction: column;}
-}
- /* Estilo para el input de búsqueda */
-#buscador:focus {
-    outline: none;
-    border-color: #FFA726;
-    box-shadow: 0 0 8px rgba(255, 167, 38, 0.5);
+
+.header-content h1 {
+    color: var(--naranja);
+    margin: 10px 0;
+    font-size: 3rem;
+    font-weight: 800;
 }
 
-/* Botón dentro de la receta */
-.btn-ver {
-    background: #556B2F;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.btn-ver:hover {
-    background: #212121;
-}
-
-/* Clase para ocultar recetas que no coincidan */
-.hidden {
-    display: none;
-}
-.btn-link {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 15px;
-    background-color: #556B2F; /* El verde oliva de tu header */
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: transform 0.2s, background 0.2s;
-}
-
-.btn-link:hover {
-    background-color: #212121; /* Negro/Gris oscuro al pasar el mouse */
-    transform: scale(1.05);
-}
-/* Estilos para las tarjetas de recetas y etiquetas */
-.receta-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    position: relative; /* Para posicionar el corazón dentro */
-}
-
-.receta-card:hover {
-    transform: translateY(-5px);
+.logo-header {
+    height: 100px;
+    border-radius: 50%;
+    background: white;
+    padding: 5px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    
 }
 
-.tag {
+/* --- 3. NAVEGACIÓN --- */
+.main-nav {
+    background: var(--violeta);
+    padding: 0.8rem 5%;
+    display: flex;
+    justify-content: center; /* Centra los enlaces */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+}
+
+.nav-links, .nav-auth {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.main-nav a {
+    color: var(--blanco);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 18px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.main-nav a:hover, .main-nav a.active {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-auth-outline {
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+.btn-salir {
+    background: var(--rojo) !important;
+}
+
+/* --- 4. CONTENEDORES Y SECCIONES --- */
+.container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--verde-oliva);
+    font-size: 2rem;
+}
+
+/* --- 5. TARJETAS (FEATURES) Y BOTONES PÍLDORA --- */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 2rem 0;
+}
+
+.feature, .receta-card {
+    background: var(--blanco);
+    padding: 3rem 2rem;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: var(--sombra);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #eee;
+    position: relative; /* Para el posicionamiento del corazón en recetas */
+}
+
+.feature:hover, .receta-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(124, 77, 255, 0.15);
+    border-color: var(--violeta);
+}
+
+.feature i, .receta-card i:not(.fa-heart) {
+    font-size: 3.5rem;
+    color: var(--violeta);
+    margin-bottom: 1.5rem;
+}
+
+.feature h3, .receta-card h3 {
+    margin-bottom: 1rem;
+    color: var(--verde-oliva);
+}
+
+.feature p, .receta-card p {
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.feature-btn {
     display: inline-block;
-    background: #556B2F;
+    padding: 12px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin-top: auto;
+}
+
+.btn-violeta {
+    background: var(--violeta);
     color: white;
-    padding: 2px 10px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    margin-top: 10px;
+}
+
+.btn-violeta:hover {
+    background: #6a3de8;
+    box-shadow: 0 5px 15px rgba(124, 77, 255, 0.4);
+}
+
+/* --- 6. BUSCADOR Y FILTROS (RECETAS) --- */
+#buscador-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.search-container {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+#inputBuscador {
+    width: 100%;
+    max-width: 600px;
+    padding: 15px 25px;
+    border-radius: 30px;
+    border: 2px solid var(--verde-oliva);
+    font-size: 1rem;
+    background-color: var(--blanco);
+    transition: all 0.3s ease;
 }
 
 #inputBuscador:focus {
     outline: none;
-    border-color: #7C4DFF;
-    box-shadow: 0 0 10px rgba(124, 77, 255, 0.2);
+    border-color: var(--violeta);
+    box-shadow: 0 0 12px rgba(124, 77, 255, 0.15);
 }
 
-
-.btn-fav {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: white;
-    border: none;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    color: #ccc; /* Gris por defecto */
-    transition: all 0.3s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
-/* Clase que se activa cuando es favorito */
-.btn-fav.active {
-    color: #e91e63; /* Rosa/Rojo */
-    transform: scale(1.2);
-}
-
-.btn-fav:hover {
-    background: #f0f0f0;
-}
 .btn-filtro {
-    background: #fff;
-    border: 2px solid #556B2F;
-    color: #556B2F;
-    padding: 10px 20px;
-    border-radius: 20px;
+    background: var(--blanco);
+    border: 2px solid var(--violeta);
+    color: var(--violeta);
+    padding: 10px 22px;
+    border-radius: 25px;
     cursor: pointer;
     font-weight: bold;
-    margin: 10px 5px;
-    transition: 0.3s;
-}
-
-.btn-filtro.active-filtro {
-    background: #556B2F;
-    color: #fff;
-}
-
-.btn-filtro:hover {
-    background: #7C4DFF;
-    border-color: #7C4DFF;
-    color: #fff;
-}
-
-/* Tarjeta de Login */
-.login-card {
-    background: #fff;
-    padding: 2.5rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-}
-
-/* Grupos de Input */
-.input-group {
-    text-align: left;
-    margin-bottom: 1.5rem;
-}
-
-.input-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #556B2F;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-sizing: border-box; /* Importante para el ancho total */
-    font-size: 1rem;
-}
-
-.input-group input:focus {
-    outline: none;
-    border-color: #FFA726;
-    box-shadow: 0 0 5px rgba(255, 167, 38, 0.3);
-}
-
-/* Botón de Login */
-.btn-login {
-    width: 100%;
-    padding: 12px;
-    background: #FFA726; /* Naranja de tu paleta */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.btn-login:hover {
-    background: #fb8c00;
-}
-
-.login-footer {
-    margin-top: 1.5rem;
-    font-size: 0.9rem;
-}
-
-.login-footer a {
-    color: #556B2F;
-    font-weight: bold;
-}
-
-select:focus {
-    outline: none;
-    border-color: #FFA726;
-}
-
-/* Efecto suave al pasar el mouse por el botón de registro */
-.btn-login {
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 columnas para los días */
-    gap: 10px;
+.active-filtro {
+    background: var(--violeta) !important;
+    color: var(--blanco) !important;
+    box-shadow: 0 4px 12px rgba(124, 77, 255, 0.3);
+}
+
+/* --- 7. SISTEMA DE FAVORITOS (CORREGIDO) --- */
+.btn-fav {
+    background: var(--blanco);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    
+    /* Centrado absoluto */
+    display: flex;
+    align-items: center;      /* Centrado vertical */
+    justify-content: center;   /* Centrado horizontal */
+    
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 5;
+    padding: 0;               /* Elimina paddings que puedan desplazar el icono */
+    line-height: 1;           /* Evita alturas de línea heredadas */
+}
+
+.btn-fav i {
+    color: #ddd;
+    font-size: 1.4rem;
+    display: block;           /* Elimina el comportamiento de línea del icono */
+    margin: 0;                /* Asegura que no haya márgenes internos */
+    width: auto;
+    height: auto;
+}
+
+.btn-fav.active i {
+    color: var(--rojo-fav) !important;
+}
+
+/* En RECETAS: Botón flotante */
+.receta-card .btn-fav {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    margin: 0;
+}
+
+
+/* Estilo para las etiquetas de las recetas */
+.tag {
+    background: var(--gris-fondo);
+    color: var(--verde-oliva);
+    padding: 5px 15px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* --- 8. DESCARGA APP --- */
+.download-section {
+    background: white;
+    border-radius: 30px;
+    padding: 4rem 2rem;
+    margin-top: 4rem;
+    box-shadow: var(--sombra);
+}
+
+.download-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.app-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     margin-top: 20px;
 }
 
-.day-header {
-    background: #556B2F;
+.btn-store {
+    background: #000;
     color: white;
+    padding: 12px 25px;
+    border-radius: 12px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: fit-content;
+}
+
+.qr-container {
     text-align: center;
-    padding: 10px;
-    border-radius: 8px 8px 0 0;
+    padding: 20px;
+    border: 2px dashed var(--violeta);
+    border-radius: 20px;
+}
+
+/* --- 9. CONTACTO CTA (INDEX) --- */
+#contacto-cta {
+    text-align: center;
+    padding: 80px 20px;
+    background: var(--blanco);
+    border-radius: 30px;
+    margin-top: 4rem;
+    box-shadow: var(--sombra);
+}
+
+#contacto-cta h2 {
+    color: var(--verde-oliva);
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.link-destacado {
+    color: var(--violeta);
+    font-weight: 800;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-bottom: 3px solid var(--violeta);
+    padding-bottom: 5px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.link-destacado:hover {
+    color: var(--naranja);
+    border-color: var(--naranja);
+    transform: translateY(-3px);
+}
+
+/* --- 10. ANIMACIONES Y FOOTER --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animacion-entrada {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.no-results-msg {
+    display: none;
+    text-align: center;
+    color: var(--verde-oliva);
     font-weight: bold;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    margin-top: 2rem;
+}
+
+.main-footer {
+    background: #f8f9fa;
+    padding: 3rem 1rem;
+    text-align: center;
+    border-top: 1px solid #eee;
+    margin-top: 5rem;
+}
+
+.social-links {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.social-links a {
+    color: #aaa;
+    font-size: 1.5rem;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--violeta);
+}
+
+/* --- 11. RESPONSIVE --- */
+@media (max-width: 768px) {
+    .main-nav {
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 15px;
+    }
+    
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .header-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .container {
+        padding: 1rem;
+    }
+}
+
+/* --- 12. CALENDARIO SEMANAL --- */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 15px;
+    background: var(--blanco);
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: var(--sombra);
+    overflow-x: auto;
+}
+
+.day-header {
+    background: var(--verde-oliva);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 0.9rem;
 }
 
 .meal-slot {
-    background: #f9f9f9;
-    border: 1px dashed #ccc;
-    min-height: 80px;
-    padding: 10px;
-    border-radius: 8px;
+    background: var(--gris-fondo);
+    padding: 15px;
+    border-radius: 15px;
+    min-height: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px dashed #ddd;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.meal-slot:hover {
+    border-color: var(--violeta);
+    background: #f0ebff;
+    transform: scale(1.02);
 }
 
 .meal-label {
     font-size: 0.7rem;
     text-transform: uppercase;
-    color: #777;
+    color: var(--violeta);
+    font-weight: 800;
     margin-bottom: 5px;
 }
 
 .meal-content {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: #556B2F;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--texto-oscuro);
 }
 
 .meal-content.empty {
-    color: #bbb;
+    color: #aaa;
+    font-style: italic;
+}
+
+/* --- 13. MODAL --- */
+.modal-overlay {
+    display: none; 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.6); 
+    backdrop-filter: blur(5px);
+    z-index: 2000; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.modal-card {
+    background: white; 
+    padding: 2.5rem; 
+    border-radius: 30px; 
+    width: 90%; 
+    max-width: 450px; 
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+}
+
+.modal-list {
+    margin: 20px 0; 
+    max-height: 300px; 
+    overflow-y: auto;
+    border-radius: 15px;
+}
+
+.modal-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
     cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--verde-oliva);
+    font-weight: 600;
 }
 
-/* Ajuste para móviles */
-@media (max-width: 768px) {
-    .calendar-grid {
-        grid-template-columns: 1fr; /* Una sola columna en celulares */
-    }
+.modal-item:hover {
+    background: var(--gris-fondo);
+    color: var(--violeta);
 }
 
-nav a[onclick="cerrarSesion()"] {
-    background-color: #d32f2f !important; /* Rojo */
+/* --- ESTILO PARA EL BOTÓN GUARDAR SEMANA --- */
+.btn-login {
+    background: var(--naranja);
+    color: var(--texto-oscuro);
+    padding: 16px 40px;
+    border: none;
+    border-radius: 15px; /* Forma de píldora para coincidir con el index */
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 167, 38, 0.3);
+    display: inline-block;
 }
 
-nav a[onclick="cerrarSesion()"]:hover {
-    background-color: #b71c1c !important; /* Rojo más oscuro */
-    color: white;
+.btn-login:hover {
+    background: #fb8c00; /* Un naranja un poco más oscuro al pasar el mouse */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 167, 38, 0.4);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+/* --- 14. PÁGINA DE ACTIVIDADES (RENDIMIENTO) --- */
+.filtros-tiempo {
+    display: flex;
+    background: #eeeeee;
+    padding: 5px;
+    border-radius: 12px;
+    gap: 5px;
+    width: fit-content;
+}
+
+.btn-filtro {
+    border: none;
+    background: transparent;
+    padding: 8px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.btn-filtro.activo {
+    background: var(--blanco);
+    color: var(--violeta);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Formulario de Actividad */
+#formActividad {
+    background: var(--blanco);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: var(--sombra);
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--verde-oliva);
+    font-size: 0.9rem;
+}
+
+#formActividad input, #formActividad select {
+    border: 2px solid #eee;
+    padding: 12px;
+    border-radius: 12px;
+    transition: border-color 0.3s;
+    font-family: inherit;
+}
+
+#formActividad input:focus, #formActividad select:focus {
+    outline: none;
+    border-color: var(--violeta);
+}
+
+/* Historial de entrenamiento */
+#historial {
+    background: var(--blanco);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: var(--sombra);
+}
+
+.actividad-card {
+    background: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    border-left: 5px solid var(--violeta);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeIn 0.5s ease;
+}
+
+#totalesHoy {
+    margin-top: 20px;
+    font-weight: 800;
+    color: var(--verde-oliva);
+    border-top: 2px solid var(--gris-fondo);
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-around;
+}
+
+/* --- 15. BOTONES DE TIENDA (APP) --- */
+.btn-descarga {
+    transition: transform 0.3s ease;
+}
+
+.btn-descarga:hover {
+    transform: scale(1.05);
+}
+
+/* --- 16. AJUSTES DE CONTACTO --- */
+.contacto-link {
+    display: flex;         /* Activa el modo fila */
+    align-items: center;    /* Centra verticalmente icono y texto */
+    gap: 12px;              /* Espacio controlado entre el icono y el texto */
+    text-decoration: none;
+    margin-bottom: 15px;
+    color: var(--texto-oscuro);
+}
+
+.contacto-link:hover:not(.no-click) {
+    background: rgba(124, 77, 255, 0.05);
+}
+
+.contacto-link i {
+    width: 25px;            /* Ancho fijo para que los textos empiecen alineados */
+    text-align: center;     /* Centra el icono dentro de su espacio de 25px */
+    font-size: 1.5rem;
+    color: var(--violeta);
+    padding-top: 25px;
+}
+
+/* Ajuste específico para redes sociales */
+.red-social-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.red-social-item i {
+    font-size: 1.5rem;
+    width: 35px;
+    padding-top: 25px;
+}
+
+/* Estilo para los inputs de Login */
+#login-section input {
+    width: 100%;
+    padding: 14px 20px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    border: 2px solid #eee;
+    border-radius: 50px; /* Forma de píldora */
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #fcfcfc;
+}
+
+#login-section input:focus {
+    outline: none;
+    border-color: var(--naranja); /* Resalte en naranja al escribir */
+    box-shadow: 0 0 10px rgba(255, 167, 38, 0.2);
+}
+
+/* Etiquetas con iconos alineados */
+#login-section label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    color: var(--verde-oliva);
+    margin-left: 15px;
 }

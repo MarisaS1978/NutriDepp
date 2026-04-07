@@ -5,20 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendario Semanal - NutriDePP</title>
     <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <header>
-        <h1>Mi Plan Semanal</h1>
-        <p>Organiza tus comidas y alcanza tus metas</p>
+    <header class="main-header">
+        <div class="header-content">
+            <img src="Assets/Logo 2 1.png" alt="Logo NutriDePP" class="logo-header">
+            <h1>Mi Plan Semanal</h1>
+            <p>Organiza tus comidas y alcanza tus metas</p>
+        </div>
     </header>
 
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="recetas.html">Explorar Recetas</a>
-        <a href="login.html">Mi Perfil</a>
+    <nav class="main-nav">
+        <div class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="recetas.html">Recetas</a>
+            <a href="calendario.html" class="active">Calendario</a>
+            <a href="actividades.html">Actividades</a>
+            <a href="contacto.html">Contacto</a>
+        </div>
     </nav>
 
-    <main class="container">
+    <main class="container animacion-entrada">
+        <h2 class="section-title">Tu Agenda Nutricional</h2>
+        
         <div class="calendar-grid">
             <div class="day-header">Lunes</div>
             <div class="day-header">Martes</div>
@@ -32,72 +42,70 @@
                 <span class="meal-label">Desayuno</span>
                 <div class="meal-content">Pancakes de Avena</div>
             </div>
-            <div class="meal-slot">
-                <span class="meal-label">Almuerzo</span>
-                <div class="meal-content empty">+ Añadir</div>
-            </div>
-            <div class="meal-slot">
-                <span class="meal-label">Cena</span>
-                <div class="meal-content empty">+ Añadir</div>
-            </div>
+            <div class="meal-slot"><span class="meal-label">Desayuno</span><div class="meal-content empty">+ Añadir</div></div>
+            <div class="meal-slot"><span class="meal-label">Desayuno</span><div class="meal-content empty">+ Añadir</div></div>
+            <div class="meal-slot"><span class="meal-label">Desayuno</span><div class="meal-content empty">+ Añadir</div></div>
+            <div class="meal-slot"><span class="meal-label">Desayuno</span><div class="meal-content empty">+ Añadir</div></div>
+            <div class="meal-slot"><span class="meal-label">Desayuno</span><div class="meal-content empty">+ Añadir</div></div>
+            <div class="meal-slot"><span class="meal-label">Desayuno</span><div class="meal-content empty">+ Añadir</div></div>
             
             </div>
 
-        <div style="margin-top: 2rem; text-align: center;">
-            <button class="btn-login" onclick="alert('¡Plan guardado!')">Guardar Semana</button>
+        <div style="margin-top: 3rem; text-align: center;">
+            <button class="btn-login" style="max-width: 300px;" onclick="alert('¡Plan guardado!')">Guardar Semana</button>
         </div>
     </main>
-    <div id="modalRecetas" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
-    <div style="background:white; padding:2rem; border-radius:12px; width:90%; max-width:400px; text-align:center;">
-        <h3>Selecciona una de tus favoritas</h3>
-        <div id="listaFavoritosSeleccion" style="margin: 20px 0; max-height: 200px; overflow-y: auto;">
-            </div>
-        <button onclick="cerrarModal()" class="btn-login" style="background:#777;">Cancelar</button>
+
+    <div id="modalRecetas" class="modal-overlay">
+        <div class="modal-card">
+            <h3>Mis Favoritos <i class="fa-solid fa-heart" style="color: var(--rojo-fav);"></i></h3>
+            <p>Selecciona una receta para tu plan</p>
+            <div id="listaFavoritosSeleccion" class="modal-list"></div>
+            <button onclick="cerrarModal()" class="btn-filtro" style="margin: 0 auto;">Cerrar</button>
+        </div>
     </div>
-</div>
-<script>
-    let slotSeleccionado = null;
 
-    // Función para abrir el modal
-    function abrirModal(elemento) {
-        slotSeleccionado = elemento.querySelector('.meal-content');
-        const modal = document.getElementById('modalRecetas');
-        const lista = document.getElementById('listaFavoritosSeleccion');
-        lista.innerHTML = ""; 
+    <script>
+        // Tu lógica de JS se mantiene igual
+        let slotSeleccionado = null;
 
-        let hayFavs = false;
-        for (let i = 0; i < localStorage.length; i++) {
-            let clave = localStorage.key(i);
-            if (clave.startsWith('fav-')) {
-                hayFavs = true;
-                let item = document.createElement('div');
-                // Aquí podrías mejorar el nombre si guardaste más datos
-                item.innerHTML = "Receta Guardada #" + clave.split('-')[1]; 
-                item.style = "padding:10px; border-bottom:1px solid #eee; cursor:pointer; font-weight:bold; color:#556B2F;";
-                
-                item.onclick = function() {
-                    slotSeleccionado.innerText = this.innerText;
-                    slotSeleccionado.classList.remove('empty');
-                    cerrarModal();
-                };
-                lista.appendChild(item);
+        function abrirModal(elemento) {
+            slotSeleccionado = elemento.querySelector('.meal-content');
+            const modal = document.getElementById('modalRecetas');
+            const lista = document.getElementById('listaFavoritosSeleccion');
+            lista.innerHTML = ""; 
+
+            let hayFavs = false;
+            for (let i = 0; i < localStorage.length; i++) {
+                let clave = localStorage.key(i);
+                if (clave.startsWith('fav-')) {
+                    hayFavs = true;
+                    let item = document.createElement('div');
+                    item.className = "modal-item";
+                    item.innerHTML = `<i class="fa-solid fa-utensils"></i> Receta #${clave.split('-')[1]}`; 
+                    
+                    item.onclick = function() {
+                        slotSeleccionado.innerText = this.innerText;
+                        slotSeleccionado.classList.remove('empty');
+                        cerrarModal();
+                    };
+                    lista.appendChild(item);
+                }
             }
+
+            if (!hayFavs) {
+                lista.innerHTML = "<p style='padding:20px; color:#666;'>No tienes favoritos aún.</p>";
+            }
+            modal.style.display = "flex";
         }
 
-        if (!hayFavs) {
-            lista.innerHTML = "<p>No tienes favoritos. Ve a la sección de Recetas y marca algunas con ❤️.</p>";
+        function cerrarModal() {
+            document.getElementById('modalRecetas').style.display = "none";
         }
-        modal.style.display = "flex";
-    }
 
-    function cerrarModal() {
-        document.getElementById('modalRecetas').style.display = "none";
-    }
-
-    // Asignar el evento click a todos los slots
-    document.querySelectorAll('.meal-slot').forEach(slot => {
-        slot.addEventListener('click', () => abrirModal(slot));
-    });
-</script>
+        document.querySelectorAll('.meal-slot').forEach(slot => {
+            slot.addEventListener('click', () => abrirModal(slot));
+        });
+    </script>
 </body>
 </html>

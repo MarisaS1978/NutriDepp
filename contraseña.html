@@ -5,39 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar Contraseña - NutriDePP</title>
     <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #f0f2f5;">
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: linear-gradient(135deg, #f0f2f5 0%, #e2e8f0 100%); margin: 0;">
 
-    <div class="login-card">
-        <header>
-            <h2 style="color: #556B2F;">¿Olvidaste tu contraseña?</h2>
-            <p>Introduce tu correo y te enviaremos los pasos para recuperarla.</p>
+    <div class="login-card animacion-entrada">
+        <header style="background: transparent; padding: 0; text-align: center; margin-bottom: 25px;">
+            <div style="background: #556B2F; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                <i class="fa-solid fa-key" style="color: white; font-size: 1.5rem;"></i>
+            </div>
+            <h2 style="color: #556B2F; margin-bottom: 10px;">¿Olvidaste tu contraseña?</h2>
+            <p style="color: #666; font-size: 0.9rem; line-height: 1.4; padding: 0 10px;">
+                No te preocupes. Introduce tu correo y te enviaremos los pasos para recuperarla.
+            </p>
         </header>
 
-        <form id="recoverForm">
+        <form id="formRecuperar">
             <div class="input-group">
-                <label for="email-recover">Correo Electrónico</label>
-                <input type="email" id="email-recover" placeholder="tu-correo@ejemplo.com" required>
+                <label for="email"><i class="fa-regular fa-envelope"></i> Correo Electrónico</label>
+                <input type="email" id="email" placeholder="tu-correo@ejemplo.com" required>
             </div>
 
-            <button type="submit" class="btn-login">Enviar instrucciones</button>
+            <button type="submit" class="btn-login" style="width: 100%; margin-top: 10px;">
+                ENVIAR INSTRUCCIONES
+            </button>
         </form>
 
-        <div id="mensajeExito" style="display: none; margin-top: 20px; color: #556B2F; font-weight: bold;">
-            ¡Listo! Revisa tu bandeja de entrada. 📧
-        </div>
-
-        <div class="login-footer">
-            <a href="login.html" style="color: #7C4DFF; text-decoration: none;">← Volver al Login</a>
+        <div class="login-footer" style="text-align: center; margin-top: 25px;">
+            <a href="login.html" style="color: #7C4DFF; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
+                <i class="fa-solid fa-arrow-left"></i> Volver al Login
+            </a>
         </div>
     </div>
 
     <script>
-        document.getElementById('recoverForm').addEventListener('submit', (e) => {
+        document.getElementById('formRecuperar').addEventListener('submit', (e) => {
             e.preventDefault();
-            // Simulación de envío
-            document.getElementById('recoverForm').style.display = 'none';
-            document.getElementById('mensajeExito').style.display = 'block';
+            const email = document.getElementById('email').value;
+            // Aquí iría la lógica de envío
+            alert('Si el correo existe en nuestra base, recibirás las instrucciones en breve.');
+            window.location.href = 'login.html';
         });
     </script>
 </body>
