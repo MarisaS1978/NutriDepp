@@ -38,10 +38,10 @@
 
                 <div class="filtros-tiempo"
                     style="display: flex; background: #eee; padding: 5px; border-radius: 10px; gap: 5px;">
-                    <button onclick="actualizarPeriodo('diario')" class="btn-filtro">Día</button>
-                    <button onclick="actualizarPeriodo('semanal')" class="btn-filtro activo">Semana</button>
-                    <button onclick="actualizarPeriodo('mensual')" class="btn-filtro">Mes</button>
-                    <button onclick="actualizarPeriodo('anual')" class="btn-filtro">Año</button>
+                    <button onclick="actualizarPeriodo('diario', this)" class="btn-filtro">Día</button>
+                    <button onclick="actualizarPeriodo('semanal', this)" class="btn-filtro activo">Semana</button>
+                    <button onclick="actualizarPeriodo('mensual', this)" class="btn-filtro">Mes</button>
+                    <button onclick="actualizarPeriodo('anual', this)" class="btn-filtro">Año</button>
                 </div>
             </div>
 
@@ -177,15 +177,20 @@
         });
 
         // FUNCIONALIDAD DE LOS FILTROS
-        function actualizarPeriodo(periodo) {
-            document.querySelectorAll('.btn-filtro').forEach(btn => btn.classList.remove('activo'));
-            event.target.classList.add('activo');
+        function actualizarPeriodo(periodo, boton) {
+            document
+                .querySelectorAll('.filtros-tiempo .btn-filtro')
+                .forEach(btn => btn.classList.remove('activo'));
+
+            if (boton) boton.classList.add('activo');
 
             graficoRendimiento.data.labels = datosGrafico[periodo].labels;
             graficoRendimiento.data.datasets[0].data = datosGrafico[periodo].km;
             graficoRendimiento.data.datasets[1].data = datosGrafico[periodo].cal;
             graficoRendimiento.update();
         }
+
+
 
         // LÓGICA DEL FORMULARIO
         const form = document.getElementById('formActividad');
