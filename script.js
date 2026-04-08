@@ -140,3 +140,67 @@ function cerrarSesion() {
         window.location.href = 'login.html';
     }
 }
+
+// --- MANEJO DEL FORMULARIO ---
+const btnMostrar = document.getElementById('btnMostrarForm');
+const contenedorForm = document.getElementById('formRecetaContenedor');
+const form = document.getElementById('formNuevaReceta');
+const listaRecetas = document.getElementById('listaRecetas');
+
+btnMostrar.addEventListener('click', () => {
+    contenedorForm.style.display = 'block';
+    btnMostrar.style.display = 'none';
+});
+
+document.getElementById('btnCancelar').addEventListener('click', () => {
+    contenedorForm.style.display = 'none';
+    btnMostrar.style.display = 'flex';
+});
+
+// --- GUARDAR Y RENDERIZAR ---
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const nuevaReceta = {
+        id: "user-" + Date.now(),
+        nombre: document.getElementById('nuevoNombre').value,
+        desc: document.getElementById('nuevoDesc').value,
+        tag: document.getElementById('nuevoTag').value
+    };
+
+    // 1. Guardar en LocalStorage para que no se borre al refrescar
+    let recetasGuardadas = JSON.parse(localStorage.getItem('misRecetasPropias')) || [];
+    recetasGuardadas.push(nuevaReceta);
+    localStorage.setItem('misRecetasPropias', JSON.stringify(recetasGuardadas));
+
+    // 2. Crear la tarjeta visualmente
+    crearTarjetaReceta(nuevaReceta);
+
+    // 3. Limpiar y cerrar
+    form.reset();
+    contenedorForm.style.display = 'none';
+    btnMostrar.style.display = 'inline-block';
+});
+
+function crearTarjetaReceta(receta) {
+    const div = document.createElement('div');
+    div.className = "feature receta-card";
+    div.setAttribute('data-id', receta.id);
+    div.setAttribute('data-tags', `${receta.nombre} ${receta.tag}`.toLowerCase());
+
+    div.innerHTML = `
+        <button class="btn-fav" title="Guardar en favoritos"><i class="fa-solid fa-heart"></i></button>
+        <i class="fa-solid fa-utensils"></i>
+        <h3>${receta.nombre}</h3>
+        <p>${receta.desc}</p>
+        <span class="tag">${receta.tag}</span>
+    `;
+    
+    listaRecetas.appendChild(div);
+}
+
+// Cargar las recetas guardadas al iniciar la página
+window.addEventListener('DOMContentLoaded', () => {
+    let recetasGuardadas = JSON.parse(localStorage.getItem('misRecetasPropias')) || [];
+    recetasGuardadas.forEach(r => crearTarjetaReceta(r));
+});

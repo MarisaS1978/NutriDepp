@@ -717,3 +717,15 @@ body {
     color: var(--verde-oliva);
     margin-left: 15px;
 }
+
+/* Indica que el slot con contenido se puede editar */
+.meal-slot:not(:has(.empty)) {
+    border: 2px solid var(--violeta);
+    background: #fff;
+}
+
+/* Cambia el color del texto si ya tiene una receta */
+.meal-content:not(.empty) {
+    color: var(--verde-oliva);
+    font-weight: 700;
+}

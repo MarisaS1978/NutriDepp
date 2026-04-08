@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="estilos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
     <header class="main-header">
         <div class="header-content">
@@ -28,7 +30,7 @@
 
     <main class="container animacion-entrada">
         <h2 class="section-title">Tu Agenda Nutricional</h2>
-        
+
         <div class="calendar-grid">
             <div class="day-header">Lunes</div>
             <div class="day-header">Martes</div>
@@ -42,17 +44,74 @@
                 <span class="meal-label">Desayuno</span>
                 <div class="meal-content">Pancakes de Avena</div>
             </div>
-            <div class="meal-slot"><span class="meal-label">Desayuno</span><div class="meal-content empty">+ Añadir</div></div>
-            <div class="meal-slot"><span class="meal-label">Desayuno</span><div class="meal-content empty">+ Añadir</div></div>
-            <div class="meal-slot"><span class="meal-label">Desayuno</span><div class="meal-content empty">+ Añadir</div></div>
-            <div class="meal-slot"><span class="meal-label">Desayuno</span><div class="meal-content empty">+ Añadir</div></div>
-            <div class="meal-slot"><span class="meal-label">Desayuno</span><div class="meal-content empty">+ Añadir</div></div>
-            <div class="meal-slot"><span class="meal-label">Desayuno</span><div class="meal-content empty">+ Añadir</div></div>
-            
+            <div class="meal-slot"><span class="meal-label">Desayuno</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Desayuno</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Desayuno</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Desayuno</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Desayuno</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Desayuno</span>
+                <div class="meal-content empty">+ Añadir</div>
             </div>
 
+            <div class="meal-slot"><span class="meal-label">Almuerzo</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Almuerzo</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Almuerzo</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Almuerzo</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Almuerzo</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Almuerzo</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Almuerzo</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+
+            <div class="meal-slot"><span class="meal-label">Cena</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Cena</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Cena</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Cena</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Cena</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Cena</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+            <div class="meal-slot"><span class="meal-label">Cena</span>
+                <div class="meal-content empty">+ Añadir</div>
+            </div>
+
+        </div>
+
         <div style="margin-top: 3rem; text-align: center;">
-            <button class="btn-login" style="max-width: 300px;" onclick="alert('¡Plan guardado!')">Guardar Semana</button>
+            <button class="btn-login" style="max-width: 300px;" onclick="alert('¡Plan guardado!')">Guardar
+                Semana</button>
         </div>
     </main>
 
@@ -73,7 +132,28 @@
             slotSeleccionado = elemento.querySelector('.meal-content');
             const modal = document.getElementById('modalRecetas');
             const lista = document.getElementById('listaFavoritosSeleccion');
-            lista.innerHTML = ""; 
+            lista.innerHTML = "";
+
+            // OPCIÓN PARA CAMBIAR/QUITAR: Si el slot NO está vacío, permitir limpiarlo
+            if (!slotSeleccionado.classList.contains('empty')) {
+                let btnLimpiar = document.createElement('div');
+                btnLimpiar.className = "modal-item";
+                btnLimpiar.style.color = "var(--rojo)";
+                btnLimpiar.innerHTML = `<i class="fa-solid fa-trash-can"></i> <strong>Quitar de la lista</strong>`;
+
+                btnLimpiar.onclick = function () {
+                    slotSeleccionado.innerText = "+ Añadir";
+                    slotSeleccionado.classList.add('empty');
+                    cerrarModal();
+                };
+                lista.appendChild(btnLimpiar);
+
+                // Separador visual
+                let hr = document.createElement('hr');
+                hr.style.margin = "10px 0";
+                hr.style.opacity = "0.2";
+                lista.appendChild(hr);
+            }
 
             let hayFavs = false;
             for (let i = 0; i < localStorage.length; i++) {
@@ -82,9 +162,10 @@
                     hayFavs = true;
                     let item = document.createElement('div');
                     item.className = "modal-item";
-                    item.innerHTML = `<i class="fa-solid fa-utensils"></i> Receta #${clave.split('-')[1]}`; 
-                    
-                    item.onclick = function() {
+                    // Tomamos el nombre real de la receta guardado o el ID
+                    item.innerHTML = `<i class="fa-solid fa-utensils"></i> Receta #${clave.split('-')[1]}`;
+
+                    item.onclick = function () {
                         slotSeleccionado.innerText = this.innerText;
                         slotSeleccionado.classList.remove('empty');
                         cerrarModal();
@@ -93,12 +174,12 @@
                 }
             }
 
-            if (!hayFavs) {
+            if (!hayFavs && slotSeleccionado.classList.contains('empty')) {
                 lista.innerHTML = "<p style='padding:20px; color:#666;'>No tienes favoritos aún.</p>";
             }
+
             modal.style.display = "flex";
         }
-
         function cerrarModal() {
             document.getElementById('modalRecetas').style.display = "none";
         }
@@ -108,4 +189,5 @@
         });
     </script>
 </body>
+
 </html>

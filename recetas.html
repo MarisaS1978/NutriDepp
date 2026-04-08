@@ -28,11 +28,11 @@
     <main class="container animacion-entrada">
         <section id="buscador-section">
             <h2 class="section-title">¿Qué quieres cocinar hoy?</h2>
-            
+
             <div class="search-container">
                 <input type="text" id="inputBuscador" placeholder="Ej: Pollo, Avena, Ensalada...">
             </div>
-            
+
             <div class="filter-buttons">
                 <button id="btnVerFavs" class="btn-filtro" title="Ver mis favoritos">
                     Mis Favoritos <i class="fa-solid fa-heart"></i>
@@ -42,18 +42,19 @@
         </section>
 
         <div class="features" id="listaRecetas">
-            
+
             <div class="feature receta-card" data-id="pollo-quinoa" data-tags="pollo quinoa proteinas almuerzo">
                 <button class="btn-fav" title="Guardar en favoritos"><i class="fa-solid fa-heart"></i></button>
                 <i class="fa-solid fa-bowl-rice"></i>
                 <h3>Bowl de Pollo y Quinoa</h3>
                 <p>Alto en proteína y fibra. Ideal para recuperación muscular.</p>
-                <span class="tag">Proteínas</span>
+                <span class="tag">Almuerzo</span>
             </div>
 
             <div class="feature receta-card" data-id="pancakes-avena" data-tags="avena desayuno energia">
                 <button class="btn-fav" title="Guardar en favoritos"><i class="fa-solid fa-heart"></i></button>
-                <i class="fa-solid fa-pancakes"></i> <h3>Pancakes de Avena</h3>
+                <i class="fa-solid fa-pancakes"></i>
+                <h3>Pancakes de Avena</h3>
                 <p>Energía de larga duración para tus mañanas de cardio.</p>
                 <span class="tag">Desayuno</span>
             </div>
@@ -74,6 +75,36 @@
                 <span class="tag">Cena</span>
             </div>
         </div>
+
+        <section id="agregar-receta-section" style="margin-bottom: 50px; text-align: center;">
+            <button id="btnMostrarForm" class="btn-login" style="background: var(--verde-oliva); color: white;">
+                <i class="fa-solid fa-plus"></i> Crear Nueva Receta
+            </button>
+
+            <div id="formRecetaContenedor"
+                style="display: none; margin-top: 20px; background: white; padding: 30px; border-radius: 20px; box-shadow: var(--sombra); max-width: 500px; margin-left: auto; margin-right: auto;">
+                <h3 style="color: var(--verde-oliva); margin-bottom: 20px;">Nueva Receta Casera</h3>
+                <form id="formNuevaReceta">
+                    <input type="text" id="nuevoNombre" placeholder="Nombre de la receta (ej: Ensalada Rusa)" required
+                        style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #ddd;">
+
+                    <input type="text" id="nuevoDesc" placeholder="Breve descripción nutricional" required
+                        style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #ddd;">
+
+                    <select id="nuevoTag"
+                        style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #ddd;">
+                        <option value="Almuerzo">Almuerzo</option>
+                        <option value="Desayuno">Desayuno</option>
+                        <option value="Cena">Cena</option>
+
+                    </select>
+
+                    <button type="submit" class="btn-login">Guardar Receta</button>
+                    <button type="button" id="btnCancelar"
+                        style="background:none; border:none; color: gray; cursor:pointer; margin-left: 10px;">Cancelar</button>
+                </form>
+            </div>
+        </section>
 
         <p id="sinResultados" class="no-results-msg">
             No encontramos recetas con ese nombre... ¡Prueba con otro ingrediente!
