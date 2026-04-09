@@ -6,6 +6,60 @@
     <title>Registro - NutriDePP</title>
     <link rel="stylesheet" href="estilos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+    /* Reutiliza las variables y base del login */
+    :root {
+        --verde-oliva: #556B2F; --violeta: #7C4DFF; --naranja: #FFA726;
+        --gris-fondo: #F6F6F6; --blanco: #ffffff; --sombra: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    body { font-family: 'Segoe UI', sans-serif; background: var(--gris-fondo); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+
+    .register-card {
+        background: var(--blanco); padding: 2.5rem; border-radius: 30px;
+        box-shadow: var(--sombra); width: 100%; max-width: 500px; text-align: center;
+    }
+
+    .input-group { text-align: left; margin-bottom: 1rem; }
+   /* Reducimos el margen inferior del label y el superior del input */
+.input-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    color: var(--verde-oliva);
+    margin-left: 15px;
+    margin-bottom: 4px; /* Antes estaba en 8px o más, esto lo acerca */
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 20px;
+    margin-top: 0; /* Eliminamos cualquier margen superior que empuje el input hacia abajo */
+    margin-bottom: 15px; /* Espacio con el siguiente grupo */
+    border: 2px solid #eee;
+    border-radius: 50px;
+    background-color: #fcfcfc;
+    transition: all 0.3s ease;
+}
+
+/* Si usas iconos dentro del label, asegúrate de que no tengan padding extra */
+.input-group label i {
+    font-size: 1rem;
+    padding: 0 !important;
+    margin: 0;
+}
+
+    .input-group input:focus { border-color: var(--violeta); outline: none; }
+
+    .btn-register {
+        background: var(--violeta); color: white; width: 100%;
+        padding: 15px; border: none; border-radius: 50px;
+        font-weight: bold; cursor: pointer; transition: 0.3s;
+    }
+
+    .btn-register:hover { background: #6a3de8; transform: translateY(-2px); }
+</style>
 </head>
 <body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: linear-gradient(135deg, #f0f2f5 0%, #e2e8f0 100%); margin: 0; padding: 20px 0;">
 
@@ -60,29 +114,37 @@
             </div>
         </div>
     </div>
+<script>
+    document.getElementById('registroForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Captura de valores
+        const email = document.getElementById('email').value;
+        const pass = document.getElementById('password').value;
+        const confirm = document.getElementById('confirm').value;
 
-    <script>
-        document.getElementById('registroForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const pass = document.getElementById('password').value;
-            const confirm = document.getElementById('confirm').value;
+        // Validación de coincidencia
+        if (pass !== confirm) {
+            alert('Las contraseñas no coinciden.');
+            return;
+        }
 
-            if (pass !== confirm) {
-                alert('Las contraseñas no coinciden.');
-                return;
-            }
+        // Creación del objeto usuario
+        const usuario = {
+            nombre: document.getElementById('nombre').value,
+            email: email,
+            password: pass,
+            objetivo: document.getElementById('objetivo').value
+        };
 
-            const usuario = {
-                nombre: document.getElementById('nombre').value,
-                email: document.getElementById('email').value,
-                password: pass,
-                objetivo: document.getElementById('objetivo').value
-            };
-
-            localStorage.setItem('usuarioRegistrado', JSON.stringify(usuario));
-            alert('¡Cuenta creada con éxito! Ahora puedes iniciar sesión.');
-            window.location.href = 'login.html';
-        });
-    </script>
+        // Guardado en localStorage (esto es lo que lee el login)
+        localStorage.setItem('usuarioRegistrado', JSON.stringify(usuario));
+        
+        alert('¡Cuenta creada con éxito! Ahora puedes iniciar sesión.');
+        
+        // Redirección automática al login
+        window.location.href = 'login.html';
+    });
+</script>
 </body>
 </html>

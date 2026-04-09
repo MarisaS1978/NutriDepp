@@ -7,6 +7,7 @@ const mensajeSinResultados = document.getElementById('sinResultados');
 const btnFavs = document.getElementById('btnVerFavs');
 const btnTodas = document.getElementById('btnVerTodas');
 const loginForm = document.getElementById('loginForm');
+const listaRecetas = document.getElementById('listaRecetas');
 
 // 2. ESTADO GLOBAL
 let filtroSoloFavoritos = false;
@@ -19,18 +20,18 @@ function filtrar() {
     const textoBusqueda = buscador.value.toLowerCase().trim();
     let hayResultados = false;
 
-    recetas.forEach(receta => {
-        // Obtenemos datos de la tarjeta
+    // Seleccionamos todas las recetas (las del HTML + las creadas dinámicamente)
+    const todasLasRecetas = document.querySelectorAll('.receta-card');
+
+    todasLasRecetas.forEach(receta => {
         const titulo = receta.querySelector('h3').innerText.toLowerCase();
         const tags = receta.getAttribute('data-tags')?.toLowerCase() || "";
         const botonFav = receta.querySelector('.btn-fav');
         const esFavorito = botonFav ? botonFav.classList.contains('active') : false;
 
-        // Lógica de coincidencia
         const coincideTexto = titulo.includes(textoBusqueda) || tags.includes(textoBusqueda);
         const cumpleFiltroFav = filtroSoloFavoritos ? esFavorito : true;
 
-        // Mostrar u ocultar
         if (coincideTexto && cumpleFiltroFav) {
             receta.style.display = "block";
             hayResultados = true;
@@ -39,101 +40,113 @@ function filtrar() {
         }
     });
 
-    // Mostrar mensaje si no hay nada que coincida
     if (mensajeSinResultados) {
         mensajeSinResultados.style.display = hayResultados ? "none" : "block";
     }
 }
 
-/* --- EVENTOS DE BUSQUEDA Y FILTROS --- */
+/* --- LÓGICA DE FAVORITOS (DELEGACIÓN DE EVENTOS) --- */
 
-// Escuchar escritura en el buscador
-if (buscador) {
-    buscador.addEventListener('input', filtrar);
-}
+// Usamos delegación de eventos para capturar clicks en corazones incluso de recetas nuevas
+document.addEventListener('click', (e) => {
+    const boton = e.target.closest('.btn-fav');
+    if (!boton) return;
 
-// Botón "Ver mis Favoritos"
-if (btnFavs) {
-    btnFavs.addEventListener('click', () => {
-        filtroSoloFavoritos = true;
-        btnFavs.classList.add('active-filtro');
-        btnTodas.classList.remove('active-filtro');
-        filtrar();
-    });
-}
-
-// Botón "Ver Todas"
-if (btnTodas) {
-    btnTodas.addEventListener('click', () => {
-        filtroSoloFavoritos = false;
-        btnTodas.classList.add('active-filtro');
-        btnFavs.classList.remove('active-filtro');
-        filtrar();
-    });
-}
-
-/* --- LÓGICA DE FAVORITOS (CORAZONES) --- */
-
-document.querySelectorAll('.btn-fav').forEach(boton => {
     const recetaCard = boton.closest('.receta-card');
     if (!recetaCard) return;
 
     const recetaId = recetaCard.getAttribute('data-id');
+    const nombreReceta = recetaCard.querySelector('h3').innerText;
 
-    // Recuperar estado guardado al cargar la página
-    if (recetaId && localStorage.getItem('fav-' + recetaId)) {
-        boton.classList.add('active');
+    e.stopPropagation();
+
+    if (!recetaId) return console.error("Falta data-id en esta receta");
+
+    const esAhoraFav = boton.classList.toggle('active');
+
+    if (esAhoraFav) {
+        // Guardamos el NOMBRE REAL para que el calendario lo pueda leer
+        localStorage.setItem('fav-' + recetaId, nombreReceta);
+    } else {
+        localStorage.removeItem('fav-' + recetaId);
+        // Si estamos viendo solo favoritos, ocultar la tarjeta al desmarcarla
+        if (filtroSoloFavoritos) filtrar();
     }
-
-    // Evento click en el corazón
-    boton.addEventListener('click', (e) => {
-        e.stopPropagation(); // Evita que el click afecte a otros elementos
-        
-        if (!recetaId) return console.error("Falta data-id en esta receta");
-
-        const esAhoraFav = boton.classList.toggle('active');
-
-        if (esAhoraFav) {
-            localStorage.setItem('fav-' + recetaId, 'true');
-        } else {
-            localStorage.removeItem('fav-' + recetaId);
-            // Si el usuario está en la pestaña de favoritos, ocultamos la card al quitar el corazón
-            if (filtroSoloFavoritos) filtrar();
-        }
-    });
 });
 
-/* --- LÓGICA DE LOGIN Y SESIÓN --- */
+/**
+ * Marca como activos los corazones de las recetas que ya están en el HTML
+ */
+function inicializarCorazones() {
+    document.querySelectorAll('.btn-fav').forEach(boton => {
+        const recetaCard = boton.closest('.receta-card');
+        const recetaId = recetaCard?.getAttribute('data-id');
+        
+        if (recetaId && localStorage.getItem('fav-' + recetaId)) {
+            boton.classList.add('active');
+        }
+    });
+}
 
+/* --- EVENTOS DE BÚSQUEDA Y FILTROS --- */
+
+if (buscador) {
+    buscador.addEventListener('input', filtrar);
+}
+
+if (btnFavs) {
+    btnFavs.addEventListener('click', () => {
+        filtroSoloFavoritos = true;
+        buscador.value = ""; // Limpiamos el buscador al cambiar de filtro
+        
+        // Manejo de clases
+        btnFavs.classList.add('active-filtro');
+        btnTodas.classList.remove('active-filtro');
+        document.getElementById('btnVerBebidas')?.classList.remove('active-filtro');
+        
+        filtrar();
+    });
+}
+
+if (btnTodas) {
+    btnTodas.addEventListener('click', () => {
+        filtroSoloFavoritos = false;
+        buscador.value = ""; // Limpiamos el buscador para ver todo el contenido
+        
+        // Manejo de clases
+        btnTodas.classList.add('active-filtro');
+        btnFavs.classList.remove('active-filtro');
+        document.getElementById('btnVerBebidas')?.classList.remove('active-filtro');
+        
+        filtrar();
+    });
+}
+
+/* --- LÓGICA DE LOGIN --- */
 if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        
         const email = document.getElementById('email').value;
         const pass = document.getElementById('password').value;
+        
+        // Intentamos obtener el usuario
+        const usuarioData = localStorage.getItem('usuarioRegistrado');
+        console.log("Datos encontrados:", usuarioData); // Esto te ayudará a debuguear
 
-        // Intentar recuperar el usuario registrado previamente
-        const usuarioRegistrado = localStorage.getItem('usuarioRegistrado');
-
-        if (usuarioRegistrado) {
-            const user = JSON.parse(usuarioRegistrado);
-
+        if (usuarioData) {
+            const user = JSON.parse(usuarioData);
             if (email === user.email && pass === user.password) {
                 alert('¡Bienvenido a NutriDePP!');
                 sessionStorage.setItem('sesionActiva', 'true'); 
                 window.location.href = 'index.html';
             } else {
-                alert('Credenciales incorrectas. Intenta de nuevo.');
+                alert('La contraseña o el correo no coinciden.');
             }
         } else {
-            alert('No se encontró ninguna cuenta. Por favor, regístrate primero.');
+            alert('No hay ninguna cuenta registrada con este correo.');
         }
     });
 }
-
-/**
- * Función global para cerrar sesión (usada en el nav)
- */
 function cerrarSesion() {
     if (confirm("¿Seguro que quieres salir?")) {
         sessionStorage.removeItem('sesionActiva');
@@ -141,48 +154,54 @@ function cerrarSesion() {
     }
 }
 
-// --- MANEJO DEL FORMULARIO ---
+/* --- CREACIÓN DE NUEVAS RECETAS --- */
+
 const btnMostrar = document.getElementById('btnMostrarForm');
 const contenedorForm = document.getElementById('formRecetaContenedor');
-const form = document.getElementById('formNuevaReceta');
-const listaRecetas = document.getElementById('listaRecetas');
+const formNuevaReceta = document.getElementById('formNuevaReceta');
 
-btnMostrar.addEventListener('click', () => {
-    contenedorForm.style.display = 'block';
-    btnMostrar.style.display = 'none';
-});
+if (btnMostrar) {
+    btnMostrar.addEventListener('click', () => {
+        contenedorForm.style.display = 'block';
+        btnMostrar.style.display = 'none';
+    });
+}
 
-document.getElementById('btnCancelar').addEventListener('click', () => {
-    contenedorForm.style.display = 'none';
-    btnMostrar.style.display = 'flex';
-});
+const btnCancelar = document.getElementById('btnCancelar');
+if (btnCancelar) {
+    btnCancelar.addEventListener('click', () => {
+        contenedorForm.style.display = 'none';
+        btnMostrar.style.display = 'inline-block';
+    });
+}
 
-// --- GUARDAR Y RENDERIZAR ---
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
+if (formNuevaReceta) {
+    formNuevaReceta.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-    const nuevaReceta = {
-        id: "user-" + Date.now(),
-        nombre: document.getElementById('nuevoNombre').value,
-        desc: document.getElementById('nuevoDesc').value,
-        tag: document.getElementById('nuevoTag').value
-    };
+        const nuevaReceta = {
+            id: "user-" + Date.now(),
+            nombre: document.getElementById('nuevoNombre').value,
+            desc: document.getElementById('nuevoDesc').value,
+            tag: document.getElementById('nuevoTag').value
+        };
 
-    // 1. Guardar en LocalStorage para que no se borre al refrescar
-    let recetasGuardadas = JSON.parse(localStorage.getItem('misRecetasPropias')) || [];
-    recetasGuardadas.push(nuevaReceta);
-    localStorage.setItem('misRecetasPropias', JSON.stringify(recetasGuardadas));
+        // Guardar persistencia
+        let recetasGuardadas = JSON.parse(localStorage.getItem('misRecetasPropias')) || [];
+        recetasGuardadas.push(nuevaReceta);
+        localStorage.setItem('misRecetasPropias', JSON.stringify(recetasGuardadas));
 
-    // 2. Crear la tarjeta visualmente
-    crearTarjetaReceta(nuevaReceta);
+        crearTarjetaReceta(nuevaReceta);
 
-    // 3. Limpiar y cerrar
-    form.reset();
-    contenedorForm.style.display = 'none';
-    btnMostrar.style.display = 'inline-block';
-});
+        formNuevaReceta.reset();
+        contenedorForm.style.display = 'none';
+        btnMostrar.style.display = 'inline-block';
+    });
+}
 
 function crearTarjetaReceta(receta) {
+    if (!listaRecetas) return;
+
     const div = document.createElement('div');
     div.className = "feature receta-card";
     div.setAttribute('data-id', receta.id);
@@ -197,10 +216,37 @@ function crearTarjetaReceta(receta) {
     `;
     
     listaRecetas.appendChild(div);
+
+    // Si ya era favorita (en caso de recarga), activar corazón
+    if (localStorage.getItem('fav-' + receta.id)) {
+        div.querySelector('.btn-fav').classList.add('active');
+    }
 }
 
-// Cargar las recetas guardadas al iniciar la página
+/* --- INICIALIZACIÓN AL CARGAR --- */
+
 window.addEventListener('DOMContentLoaded', () => {
+    // 1. Cargar recetas del usuario
     let recetasGuardadas = JSON.parse(localStorage.getItem('misRecetasPropias')) || [];
     recetasGuardadas.forEach(r => crearTarjetaReceta(r));
+
+    // 2. Activar corazones de recetas base
+    inicializarCorazones();
 });
+
+/**
+ * Función para filtrar rápidamente usando los botones de categoría (como Bebidas)
+ */
+function filtrarPorTag(tag) {
+    if (buscador) {
+        buscador.value = tag;
+        filtroSoloFavoritos = false;
+        
+        // Manejo de clases: Resaltamos solo Bebidas
+        btnTodas?.classList.remove('active-filtro');
+        btnFavs?.classList.remove('active-filtro');
+        document.getElementById('btnVerBebidas')?.classList.add('active-filtro');
+        
+        filtrar();
+    }
+}

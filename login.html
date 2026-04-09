@@ -7,20 +7,203 @@
     <title>Login - NutriDePP</title>
     <link rel="stylesheet" href="estilos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --verde-oliva: #556B2F;
+            --violeta: #7C4DFF;
+            --naranja: #FFA726;
+            --gris-fondo: #F6F6F6;
+            --texto-oscuro: #212121;
+            --blanco: #ffffff;
+            --sombra: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--gris-fondo);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .login-card {
+            background: var(--blanco);
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: var(--sombra);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .login-logo {
+            height: 80px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        .login-header h2 {
+            color: var(--verde-oliva);
+            margin-bottom: 1rem;
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 1.2rem;
+        }
+
+        /* Reducimos el margen inferior del label y el superior del input */
+        .input-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            color: var(--verde-oliva);
+            margin-left: 15px;
+            margin-bottom: 4px;
+            /* Antes estaba en 8px o más, esto lo acerca */
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 20px;
+            margin-top: 0;
+            /* Eliminamos cualquier margen superior que empuje el input hacia abajo */
+            margin-bottom: 15px;
+            /* Espacio con el siguiente grupo */
+            border: 2px solid #eee;
+            border-radius: 50px;
+            background-color: #fcfcfc;
+            transition: all 0.3s ease;
+        }
+
+        /* Si usas iconos dentro del label, asegúrate de que no tengan padding extra */
+        .input-group label i {
+            font-size: 1rem;
+            padding: 0 !important;
+            margin: 0;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--naranja);
+            box-shadow: 0 0 10px rgba(255, 167, 38, 0.2);
+        }
+
+        .btn-login {
+            background: var(--naranja);
+            color: var(--texto-oscuro);
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 167, 38, 0.3);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            background: #fb8c00;
+        }
+
+        .divider {
+            border: 0;
+            border-top: 1px solid #eee;
+            margin: 1.5rem 0;
+        }
+
+        .link-register {
+            color: var(--violeta);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .back-home a {
+            color: var(--verde-oliva);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- AJUSTE DE ESPACIADOS --- */
+
+        .login-header p {
+            color: #666;
+            font-size: 0.95rem;
+            /* Añadimos aire abajo para que no toque la primera label */
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        .input-group {
+            text-align: left;
+            /* Espacio entre cada par label-input */
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            color: var(--verde-oliva);
+            margin-left: 15px;
+            /* Pegamos la label a su propio input */
+            margin-bottom: 4px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 20px;
+            /* Eliminamos márgenes superiores que puedan desalinear */
+            margin-top: 0;
+            border: 2px solid #eee;
+            border-radius: 50px;
+            background-color: #fcfcfc;
+            transition: all 0.3s ease;
+        }
+
+        /* Alineación de iconos en labels para evitar saltos de línea */
+        .input-group label i {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 
-<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: linear-gradient(135deg, #f0f2f5 0%, #e2e8f0 100%); margin: 0;">
+<body
+    style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: linear-gradient(135deg, #f0f2f5 0%, #e2e8f0 100%); margin: 0;">
 
-    <div style="position: absolute; width: 300px; height: 300px; background: rgba(124, 77, 255, 0.05); border-radius: 50%; top: -100px; left: -100px; z-index: 0;"></div>
-    
-    <div class="login-card animacion-entrada" style="position: relative; z-index: 1;">
-        <header style="background: transparent; color: #212121; padding: 1rem; text-align: center;">
-            <img src="Assets/Logo 2 1.png" alt="Logo" style="height: 90px; margin-bottom: 15px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">
-            <h2 style="color: #556B2F; font-size: 1.8rem; margin-bottom: 5px;">¡Hola de nuevo!</h2>
-            <p style="color: #666; font-size: 0.95rem;">Ingresa a tu panel de NutriDePP</p>
+    <div
+        style="position: absolute; width: 300px; height: 300px; background: rgba(124, 77, 255, 0.05); border-radius: 50%; top: -100px; left: -100px; z-index: 0;">
+    </div>
+
+    <div class="login-card animacion-entrada">
+        <header class="login-header">
+            <img src="Assets/Logo 2 1.png" alt="Logo" class="login-logo">
+            <h2>¡Hola de nuevo!</h2>
+            <p>Ingresa a tu panel de NutriDePP</p>
         </header>
 
-        <form id="loginForm" style="margin-top: 1rem;">
+        <form id="loginForm">
             <div class="input-group">
                 <label for="email"><i class="fa-regular fa-envelope"></i> Correo Electrónico</label>
                 <input type="email" id="email" placeholder="nombre@ejemplo.com" required>
@@ -31,33 +214,23 @@
                 <input type="password" id="password" placeholder="••••••••" required>
             </div>
 
-            <button type="submit" class="btn-login" style="margin-top: 10px; width: 100%; letter-spacing: 0.5px;">
+            <button type="submit" class="btn-login">
                 INICIAR SESIÓN
             </button>
         </form>
 
-        <div class="login-footer" style="text-align: center; margin-top: 20px;">
-            <p style="margin-bottom: 15px;">
-                <a href="contraseña.html" style="color: #666; font-size: 0.85rem; text-decoration: none;">¿Olvidaste tu contraseña?</a>
-            </p>
-            
-            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-
-            <p style="font-size: 0.95rem; color: #444;">
-                ¿No tienes cuenta? 
-                <a href="javascript:void(0)" onclick="transicionSalida('registro.html')" style="color: #7C4DFF; font-weight: bold; text-decoration: none;">
-                    Regístrate aquí
-                </a>
-            </p>
-
-            <div style="margin-top: 25px;">
-                <a href="index.html" style="color: #556B2F; text-decoration: none; font-size: 0.9rem; font-weight: 600;">
-                    <i class="fa-solid fa-arrow-left"></i> Volver al inicio
-                </a>
+        <div class="login-footer">
+            <a href="contraseña.html" class="link-forgot">¿Olvidaste tu contraseña?</a>
+            <hr class="divider">
+            <p>¿No tienes cuenta? <a href="registro.html" class="link-register">Regístrate aquí</a></p>
+                   
+            <div class="back-home">
+                <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Volver al inicio</a>
             </div>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>

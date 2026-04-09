@@ -20,8 +20,11 @@
 
     <nav class="main-nav">
         <div class="nav-links">
-            <a href="index.html">Volver al Inicio</a>
-            <a href="index.html#funcionalidades">Funcionalidades</a>
+            <a href="index.html">Inicio</a>
+            <a href="recetas.html" class="active">Recetas</a>
+            <a href="calendario.html">Calendario</a>
+            <a href="actividades.html">Actividades</a>
+            <a href="contacto.html">Contacto</a>
         </div>
     </nav>
 
@@ -38,6 +41,8 @@
                     Mis Favoritos <i class="fa-solid fa-heart"></i>
                 </button>
                 <button id="btnVerTodas" class="btn-filtro active-filtro">Ver Todas</button>
+
+                <button id="btnVerBebidas" class="btn-filtro" onclick="filtrarPorTag('Bebidas')">Bebidas</button>
             </div>
         </section>
 
@@ -74,6 +79,31 @@
                 <p>Cena ligera y rápida para descansar mejor.</p>
                 <span class="tag">Cena</span>
             </div>
+            <div class="feature receta-card" data-id="batido-energetico"
+                data-tags="bebidas batido cafe pre-entreno energia">
+                <button class="btn-fav" title="Guardar en favoritos"><i class="fa-solid fa-heart"></i></button>
+                <i class="fa-solid fa-mug-hot"></i>
+                <h3>Batido Energético Café</h3>
+                <p>Café frío, banana y un toque de canela. Energía inmediata.</p>
+                <span class="tag">Bebidas</span>
+            </div>
+
+            <div class="feature receta-card" data-id="agua-detox" data-tags="bebidas hidratacion limon pepino">
+                <button class="btn-fav" title="Guardar en favoritos"><i class="fa-solid fa-heart"></i></button>
+                <i class="fa-solid fa-glass-water"></i>
+                <h3>Agua Detox Refrescante</h3>
+                <p>Pepino, limón y menta. Hidratación ligera sin azúcares.</p>
+                <span class="tag">Bebidas</span>
+            </div>
+
+            <div class="feature receta-card" data-id="smoothie-berries"
+                data-tags="bebidas batido frutos rojos antioxidante">
+                <button class="btn-fav" title="Guardar en favoritos"><i class="fa-solid fa-heart"></i></button>
+                <i class="fa-solid fa-wine-glass-empty"></i>
+                <h3>Batido de Frutos Rojos</h3>
+                <p>Antioxidantes naturales para después de entrenar intenso.</p>
+                <span class="tag">Bebidas</span>
+            </div>
         </div>
 
         <section id="agregar-receta-section" style="margin-bottom: 50px; text-align: center;">
@@ -96,8 +126,10 @@
                         <option value="Almuerzo">Almuerzo</option>
                         <option value="Desayuno">Desayuno</option>
                         <option value="Cena">Cena</option>
-
+                        <option value="Bebidas">Bebidas / Batidos</option>
                     </select>
+
+
 
                     <button type="submit" class="btn-login">Guardar Receta</button>
                     <button type="button" id="btnCancelar"

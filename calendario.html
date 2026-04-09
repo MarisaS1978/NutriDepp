@@ -134,21 +134,18 @@
             const lista = document.getElementById('listaFavoritosSeleccion');
             lista.innerHTML = "";
 
-            // OPCIÓN PARA CAMBIAR/QUITAR: Si el slot NO está vacío, permitir limpiarlo
+            // Opción para limpiar el slot si ya tiene contenido
             if (!slotSeleccionado.classList.contains('empty')) {
                 let btnLimpiar = document.createElement('div');
                 btnLimpiar.className = "modal-item";
                 btnLimpiar.style.color = "var(--rojo)";
                 btnLimpiar.innerHTML = `<i class="fa-solid fa-trash-can"></i> <strong>Quitar de la lista</strong>`;
-
                 btnLimpiar.onclick = function () {
                     slotSeleccionado.innerText = "+ Añadir";
                     slotSeleccionado.classList.add('empty');
                     cerrarModal();
                 };
                 lista.appendChild(btnLimpiar);
-
-                // Separador visual
                 let hr = document.createElement('hr');
                 hr.style.margin = "10px 0";
                 hr.style.opacity = "0.2";
@@ -158,15 +155,22 @@
             let hayFavs = false;
             for (let i = 0; i < localStorage.length; i++) {
                 let clave = localStorage.key(i);
+
+                // Verificamos que sea una clave de favorito
                 if (clave.startsWith('fav-')) {
                     hayFavs = true;
+
+                    // OBTENEMOS EL NOMBRE REAL (Ej: "Pancakes de Avena")
+                    let nombreReceta = localStorage.getItem(clave);
+
                     let item = document.createElement('div');
                     item.className = "modal-item";
-                    // Tomamos el nombre real de la receta guardado o el ID
-                    item.innerHTML = `<i class="fa-solid fa-utensils"></i> Receta #${clave.split('-')[1]}`;
+
+                    // Mostramos el nombre real directamente
+                    item.innerHTML = `<i class="fa-solid fa-utensils"></i> ${nombreReceta}`;
 
                     item.onclick = function () {
-                        slotSeleccionado.innerText = this.innerText;
+                        slotSeleccionado.innerText = nombreReceta;
                         slotSeleccionado.classList.remove('empty');
                         cerrarModal();
                     };
@@ -174,7 +178,7 @@
                 }
             }
 
-            if (!hayFavs && slotSeleccionado.classList.contains('empty')) {
+            if (!hayFavs) {
                 lista.innerHTML = "<p style='padding:20px; color:#666;'>No tienes favoritos aún.</p>";
             }
 

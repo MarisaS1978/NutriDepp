@@ -6,6 +6,51 @@
     <title>Recuperar Contraseña - NutriDePP</title>
     <link rel="stylesheet" href="estilos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+    :root {
+        --verde-oliva: #556B2F; --naranja: #FFA726; --gris-fondo: #F6F6F6;
+    }
+
+    body { font-family: 'Segoe UI', sans-serif; background: var(--gris-fondo); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+
+    .recovery-card {
+        background: white; padding: 2.5rem; border-radius: 30px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 400px; text-align: center;
+    }
+
+    .recovery-header i { font-size: 3rem; color: var(--naranja); margin-bottom: 1rem; }
+
+    .input-group { text-align: left; margin: 1.5rem 0; }
+    
+    .input-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    color: var(--verde-oliva);
+    
+    /* CAMBIOS AQUÍ */
+    margin-left: 20px;   /* Aumentamos un poco para que rime con el padding del input */
+    margin-bottom: 6px;  /* Un poco más de aire con el input */
+    justify-content: flex-start; /* Asegura alineación al inicio */
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 20px; /* El padding de 20px debe coincidir con el margin del label */
+    margin-top: 0;
+    border: 2px solid #eee;
+    border-radius: 50px;
+    background-color: #fcfcfc;
+    transition: all 0.3s ease;
+}
+
+    .btn-recovery {
+        background: var(--verde-oliva); color: white; width: 100%;
+        padding: 15px; border: none; border-radius: 50px;
+        font-weight: bold; cursor: pointer;
+    }
+</style>
 </head>
 <body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: linear-gradient(135deg, #f0f2f5 0%, #e2e8f0 100%); margin: 0;">
 

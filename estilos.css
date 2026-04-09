@@ -53,17 +53,26 @@ body {
     background: var(--violeta);
     padding: 0.8rem 5%;
     display: flex;
-    justify-content: center; /* Centra los enlaces */
+    justify-content: space-between; 
+    align-items: center;
     position: sticky;
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 15px rgba(0,0,0,0.15);
 }
 
-.nav-links, .nav-auth {
+.nav-links {
     display: flex;
-    gap: 20px;
-    align-items: center;
+    gap: 25px;
+    flex: 1; /* Ocupa el espacio disponible */
+    justify-content: center; /* Centra los enlaces internos */
+    margin-left: 120px; /* Compensa el ancho del bloque de login para centrar mejor */
+}
+
+.nav-auth {
+    display: flex;
+    gap: 15px; /* Espacio entre Login y Salir */
+    justify-content: flex-end;
 }
 
 .main-nav a {
@@ -728,4 +737,73 @@ body {
 .meal-content:not(.empty) {
     color: var(--verde-oliva);
     font-weight: 700;
+}
+
+/* --- MEJORA DE LA TARJETA DE LOGIN --- */
+.login-card {
+    background: var(--blanco);
+    padding: 2.5rem;
+    border-radius: 30px;
+    box-shadow: var(--sombra);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-logo {
+    height: 80px;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.login-header h2 {
+    color: var(--verde-oliva);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+/* --- ARREGLO DE ALINEACIÓN DE ICONOS (CONTACTO) --- */
+.contacto-link, .red-social-item {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    gap: 15px;
+    padding: 12px;
+    border-radius: 15px;
+    transition: background 0.3s;
+    text-decoration: none;
+    color: var(--texto-oscuro);
+}
+
+/* IMPORTANTE: Quita el padding-top de los iconos que está rompiendo la alineación */
+.contacto-link i, .red-social-item i {
+    font-size: 1.4rem;
+    color: var(--violeta);
+    width: 30px;      /* Espacio fijo para el icono */
+    text-align: center;
+    padding-top: 0 !important; /* Elimina el exceso que tenías antes */
+    margin: 0;
+}
+
+/* --- DIVISOR Y ENLACES --- */
+.divider {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 1.5rem 0;
+}
+
+.link-register {
+    color: var(--violeta);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.back-home {
+    margin-top: 1.5rem;
+}
+
+.back-home a {
+    color: var(--verde-oliva);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
