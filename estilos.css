@@ -807,3 +807,59 @@ body {
     font-size: 0.9rem;
     font-weight: 600;
 }
+
+/* Contenedor general de filtros */
+.filtros-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Espacio entre la fila de días y la de favoritos */
+    margin-top: 20px;
+}
+
+/* Fila de días: uno al lado del otro */
+.filtros-tipo-dia {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Por si la pantalla es muy pequeña */
+    gap: 10px;
+}
+
+/* Estilo para los botones de día */
+.btn-dia {
+    padding: 10px 18px;
+    border-radius: 50px;
+    border: 2px solid var(--verde-oliva);
+    background: transparent;
+    color: var(--verde-oliva);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.btn-dia.active-dia {
+    background: var(--verde-oliva);
+    color: white;
+}
+
+/* Botones de favoritos y todas */
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-filtro {
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.btn-filtro.active-filtro {
+    border-color: var(--verde-oliva);
+    color: var(--verde-oliva);
+    font-weight: bold;
+}

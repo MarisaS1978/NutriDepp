@@ -30,80 +30,31 @@
 
     <main class="container animacion-entrada">
         <section id="buscador-section">
-            <h2 class="section-title">¿Qué quieres cocinar hoy?</h2>
+    <h2 class="section-title">¿Qué quieres cocinar hoy?</h2>
 
-            <div class="search-container">
-                <input type="text" id="inputBuscador" placeholder="Ej: Pollo, Avena, Ensalada...">
-            </div>
+    <div class="search-container">
+        <input type="text" id="inputBuscador" placeholder="Ej: Pollo, Avena, Ensalada...">
+    </div>
 
-            <div class="filter-buttons">
-                <button id="btnVerFavs" class="btn-filtro" title="Ver mis favoritos">
-                    Mis Favoritos <i class="fa-solid fa-heart"></i>
-                </button>
-                <button id="btnVerTodas" class="btn-filtro active-filtro">Ver Todas</button>
+    <div class="filtros-container">
+        <div class="filtros-tipo-dia">
+    <button id="btnDiaNormal" class="btn-filtro active-filtro">Día Normal</button>
+    <button id="btnDiaEntreno" class="btn-filtro">Día de Entrenamiento</button>
+    <button id="btnDiaPartido" class="btn-filtro">Día de Partido</button>
+</div>
 
-                <button id="btnVerBebidas" class="btn-filtro" onclick="filtrarPorTag('Bebidas')">Bebidas</button>
-            </div>
-        </section>
+        <div class="filter-buttons">
+            
+            <button id="btnVerFavs" class="btn-filtro" title="Ver mis favoritos">
+                Favoritos <i class="fa-solid fa-heart"></i>
+            </button>
+            <button id="btnVerTodas" class="btn-filtro active-filtro">Ver Todas</button>
+        </div>
+    </div>
+</section>
 
         <div class="features" id="listaRecetas">
 
-            <div class="feature receta-card" data-id="pollo-quinoa" data-tags="pollo quinoa proteinas almuerzo">
-                <button class="btn-fav" title="Guardar en favoritos"><i class="fa-solid fa-heart"></i></button>
-                <i class="fa-solid fa-bowl-rice"></i>
-                <h3>Bowl de Pollo y Quinoa</h3>
-                <p>Alto en proteína y fibra. Ideal para recuperación muscular.</p>
-                <span class="tag">Almuerzo</span>
-            </div>
-
-            <div class="feature receta-card" data-id="pancakes-avena" data-tags="avena desayuno energia">
-                <button class="btn-fav" title="Guardar en favoritos"><i class="fa-solid fa-heart"></i></button>
-                <i class="fa-solid fa-pancakes"></i>
-                <h3>Pancakes de Avena</h3>
-                <p>Energía de larga duración para tus mañanas de cardio.</p>
-                <span class="tag">Desayuno</span>
-            </div>
-
-            <div class="feature receta-card" data-id="smoothie-01" data-tags="batido frutas espinaca piña post-entreno">
-                <button class="btn-fav" title="Guardar en favoritos"><i class="fa-solid fa-heart"></i></button>
-                <i class="fa-solid fa-blender"></i>
-                <h3>Smoothie Verde Pro</h3>
-                <p>Espinaca, piña y proteína en polvo. Hidratación máxima.</p>
-                <span class="tag">Bebidas</span>
-            </div>
-
-            <div class="feature receta-card" data-id="omelette-01" data-tags="huevo cena ligero">
-                <button class="btn-fav" title="Guardar en favoritos"><i class="fa-solid fa-heart"></i></button>
-                <i class="fa-solid fa-egg"></i>
-                <h3>Omelette de Espinacas</h3>
-                <p>Cena ligera y rápida para descansar mejor.</p>
-                <span class="tag">Cena</span>
-            </div>
-            <div class="feature receta-card" data-id="batido-energetico"
-                data-tags="bebidas batido cafe pre-entreno energia">
-                <button class="btn-fav" title="Guardar en favoritos"><i class="fa-solid fa-heart"></i></button>
-                <i class="fa-solid fa-mug-hot"></i>
-                <h3>Batido Energético Café</h3>
-                <p>Café frío, banana y un toque de canela. Energía inmediata.</p>
-                <span class="tag">Bebidas</span>
-            </div>
-
-            <div class="feature receta-card" data-id="agua-detox" data-tags="bebidas hidratacion limon pepino">
-                <button class="btn-fav" title="Guardar en favoritos"><i class="fa-solid fa-heart"></i></button>
-                <i class="fa-solid fa-glass-water"></i>
-                <h3>Agua Detox Refrescante</h3>
-                <p>Pepino, limón y menta. Hidratación ligera sin azúcares.</p>
-                <span class="tag">Bebidas</span>
-            </div>
-
-            <div class="feature receta-card" data-id="smoothie-berries"
-                data-tags="bebidas batido frutos rojos antioxidante">
-                <button class="btn-fav" title="Guardar en favoritos"><i class="fa-solid fa-heart"></i></button>
-                <i class="fa-solid fa-wine-glass-empty"></i>
-                <h3>Batido de Frutos Rojos</h3>
-                <p>Antioxidantes naturales para después de entrenar intenso.</p>
-                <span class="tag">Bebidas</span>
-            </div>
         </div>
 
         <section id="agregar-receta-section" style="margin-bottom: 50px; text-align: center;">
@@ -126,7 +77,7 @@
                         <option value="Almuerzo">Almuerzo</option>
                         <option value="Desayuno">Desayuno</option>
                         <option value="Cena">Cena</option>
-                        <option value="Bebidas">Bebidas / Batidos</option>
+                        <option value="Bebidas">Colaciones</option>
                     </select>
 
 

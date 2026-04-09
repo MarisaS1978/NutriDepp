@@ -207,46 +207,167 @@ function crearTarjetaReceta(receta) {
     div.setAttribute('data-id', receta.id);
     div.setAttribute('data-tags', `${receta.nombre} ${receta.tag}`.toLowerCase());
 
+    // --- LÓGICA DE IMAGEN DE RESPALDO ---
+    // Si 'receta.imagen' no existe o está vacía, usamos una imagen genérica de comida saludable
+    const imgUrl = receta.imagen && receta.imagen.trim() !== "" 
+                   ? receta.imagen 
+                   : "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800";
+    
+    const infoExtra = receta.aporta || receta.beneficios || "Nutrición inteligente";
+
     div.innerHTML = `
-        <button class="btn-fav" title="Guardar en favoritos"><i class="fa-solid fa-heart"></i></button>
-        <i class="fa-solid fa-utensils"></i>
-        <h3>${receta.nombre}</h3>
-        <p>${receta.desc}</p>
-        <span class="tag">${receta.tag}</span>
+        <div class="card-image-container" style="position: relative;">
+            <img src="${imgUrl}" 
+                 alt="${receta.nombre}" 
+                 onerror="this.src='https://via.placeholder.com/800x500?text=NutriDePP+Receta'"
+                 style="width:100%; height:180px; object-fit:cover; border-radius:20px 20px 0 0; display: block;">
+            
+            <button class="btn-fav" title="Favoritos" style="position:absolute; top:12px; right:12px;">
+                <i class="fa-solid fa-heart"></i>
+            </button>
+        </div>
+        <div class="card-body" style="padding: 15px;">
+            <h3 style="font-size: 1.1rem; margin-bottom: 8px;">${receta.nombre}</h3>
+            <p style="font-size: 0.85rem; color: #666; min-height: 40px;">${infoExtra}</p>
+            <span class="tag">${receta.tag}</span>
+        </div>
     `;
     
     listaRecetas.appendChild(div);
-
-    // Si ya era favorita (en caso de recarga), activar corazón
-    if (localStorage.getItem('fav-' + receta.id)) {
-        div.querySelector('.btn-fav').classList.add('active');
-    }
 }
-
 /* --- INICIALIZACIÓN AL CARGAR --- */
 
+/* --- CARGA DINÁMICA POR TIPO DE DÍA --- */
 window.addEventListener('DOMContentLoaded', () => {
-    // 1. Cargar recetas del usuario
-    let recetasGuardadas = JSON.parse(localStorage.getItem('misRecetasPropias')) || [];
-    recetasGuardadas.forEach(r => crearTarjetaReceta(r));
+    fetch('recetas.json')
+        .then(response => response.json())
+        .then(data => {
+            if (listaRecetas) listaRecetas.innerHTML = ""; 
 
-    // 2. Activar corazones de recetas base
+            const tiposDeDia = ['dia_normal', 'dia_partido', 'dia_entrenamiento'];
+            const categorias = ['desayunos', 'almuerzos', 'cenas', 'colaciones'];
+            
+            // Creamos un Set para rastrear IDs ya procesados
+            const idsProcesados = new Set();
+
+            tiposDeDia.forEach(dia => {
+                const recetasDelDia = data.recetas[dia];
+                
+                categorias.forEach(cat => {
+                    if (recetasDelDia[cat]) {
+                        recetasDelDia[cat].forEach(receta => {
+                            // VERIFICACIÓN: Si el ID ya existe en el Set, no la cargamos
+                            if (!idsProcesados.has(receta.id)) {
+                                idsProcesados.add(receta.id);
+                                
+                                receta.tipoDia = dia;
+                                receta.tag = cat.charAt(0).toUpperCase() + cat.slice(1);
+                                
+                                crearTarjetaReceta(receta);
+                            }
+                        });
+                    }
+                });
+            });
+
+            inicializarCorazones();
+        })
+        .catch(error => console.error("Error al filtrar repetidos:", error));
+});
+
+function cargarRecetasPorDia(tipoDeDia = 'dia_normal') {
+    fetch('recetas.json')
+        .then(res => res.json())
+        .then(data => {
+            if (listaRecetas) listaRecetas.innerHTML = ""; // Limpiamos la galería actual
+            
+            const categorias = ['desayunos', 'almuerzos', 'cenas', 'colaciones'];
+            const recetasDelDia = data.recetas[tipoDeDia];
+
+            categorias.forEach(cat => {
+                if (recetasDelDia[cat]) {
+                    recetasDelDia[cat].forEach(receta => {
+                        // Agregamos el tag manualmente para que el filtro funcione
+                        receta.tag = cat.charAt(0).toUpperCase() + cat.slice(1);
+                        crearTarjetaReceta(receta);
+                    });
+                }
+            });
+            inicializarCorazones();
+        });
+}
+
+// Variable global para guardar los datos una vez cargados
+let datosRecetas = null;
+
+// Función principal para cargar y mostrar
+function mostrarRecetasPorDia(tipo) {
+    if (!datosRecetas || !listaRecetas) return;
+
+    // 1. Limpiar la galería actual
+    listaRecetas.innerHTML = "";
+
+    // 2. Obtener las recetas del día seleccionado (dia_normal, dia_partido, etc.)
+    const diaSeleccionado = datosRecetas.recetas[tipo];
+    const categorias = ['desayunos', 'almuerzos', 'cenas', 'colaciones'];
+
+    // 3. Recorrer las categorías y crear las tarjetas
+    categorias.forEach(cat => {
+        if (diaSeleccionado[cat]) {
+            diaSeleccionado[cat].forEach(receta => {
+                // Asignamos el tag de categoría para el diseño
+                receta.tag = cat.charAt(0).toUpperCase() + cat.slice(1);
+                crearTarjetaReceta(receta);
+            });
+        }
+    });
+
+    // 4. Re-inicializar los corazones de favoritos
     inicializarCorazones();
+}
+
+// Inicialización al cargar la página
+window.addEventListener('DOMContentLoaded', () => {
+    fetch('recetas.json')
+        .then(res => res.json())
+        .then(data => {
+            datosRecetas = data; // Guardamos los datos globalmente
+            mostrarRecetasPorDia('dia_normal'); // Carga inicial por defecto
+        })
+        .catch(err => console.error("Error cargando el JSON:", err));
+
+    // Eventos para los botones de TIPO DE DÍA
+   
+
+    document.getElementById('btnDiaNormal')?.addEventListener('click', (e) => {
+        gestionarActivoDia(e.currentTarget);
+        mostrarRecetasPorDia('dia_normal');
+    });
+
+    document.getElementById('btnDiaEntreno')?.addEventListener('click', (e) => {
+        gestionarActivoDia(e.currentTarget);
+        mostrarRecetasPorDia('dia_entrenamiento');
+    });
+
+    document.getElementById('btnDiaPartido')?.addEventListener('click', (e) => {
+        gestionarActivoDia(e.currentTarget);
+        mostrarRecetasPorDia('dia_partido');
+    });
+
 });
 
 /**
- * Función para filtrar rápidamente usando los botones de categoría (como Bebidas)
+/**
+ * Maneja el estado activo de los botones de día sin afectar a los de búsqueda/favoritos
  */
-function filtrarPorTag(tag) {
-    if (buscador) {
-        buscador.value = tag;
-        filtroSoloFavoritos = false;
-        
-        // Manejo de clases: Resaltamos solo Bebidas
-        btnTodas?.classList.remove('active-filtro');
-        btnFavs?.classList.remove('active-filtro');
-        document.getElementById('btnVerBebidas')?.classList.add('active-filtro');
-        
-        filtrar();
+function gestionarActivoDia(botonSeleccionado) {
+    // Buscamos los botones SOLO dentro del contenedor de días
+    const contenedorDias = document.querySelector('.filtros-tipo-dia');
+    if (contenedorDias) {
+        contenedorDias.querySelectorAll('.btn-filtro').forEach(btn => {
+            btn.classList.remove('active-filtro');
+        });
     }
+    // Agregamos la clase al que clickeamos
+    botonSeleccionado.classList.add('active-filtro');
 }

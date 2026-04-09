@@ -1,0 +1,156 @@
+{
+  "recetas": {
+    "dia_normal": {
+      "desayunos": [
+        {
+          "id": "panqueques-avena-banana-normal",
+          "nombre": "Panqueques de avena y banana con yogur y frutas",
+          "imagen": "https://images.unsplash.com/photo-1693857229775-ba05f334340e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fFBhbnF1ZXF1ZXMlMjBkZSUyMGF2ZW5hJTIweSUyMGJhbmFuYSUyMGNvbiUyMHlvZ3VyJTIweSUyMGZydXRhc3xlbnwwfHwwfHx8MA%3D%3D",
+          "ingredientes": ["1 banana madura", "1 huevo", "1/2 taza de avena", "1 cdita polvo hornear", "1/2 taza yogur natural", "Frutas frescas"],
+          "aporta": "Energía duradera, potasio, proteína y fibra"
+        },
+        {
+          "id": "tostadas-palta-huevo-normal",
+          "nombre": "Tostadas integrales con palta y huevo duro",
+          "imagen": "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800",
+          "ingredientes": ["2 rebanadas pan integral", "1/2 palta pisada", "1 huevo duro", "Limón y sal"],
+          "aporta": "Grasas buenas, carbohidratos, proteína completa"
+        },
+        {
+          "id": "licuado-banana-avena-normal",
+          "nombre": "Licuado de leche + banana + avena + miel",
+          "imagen": "https://images.unsplash.com/photo-1740637372899-e27569049917?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "ingredientes": ["1 vaso de leche", "1 banana", "2 cdas de avena", "1 cdita de miel"],
+          "aporta": "Energía rápida y sostenida sin pesadez"
+        }
+      ],
+      "almuerzos": [
+        {
+          "id": "pollo-plancha-arroz-normal",
+          "nombre": "Pollo a la plancha con arroz y zanahoria rallada",
+          "imagen": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=800",
+          "aporta": "Proteína magra + energía de bajo índice glucémico"
+        },
+        {
+          "id": "arroz-con-pollo-normal",
+          "nombre": "Arroz con pollo y vegetales",
+          "imagen": "https://images.unsplash.com/photo-1704713925047-19bc0dcca406?q=80&w=771&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "preparacion": ["Saltear vegetales", "Agregar pollo en cubos", "Sumar arroz cocido", "Condimentar"]
+        },
+        {
+          "id": "tarta-espinaca-ricota-normal",
+          "nombre": "Tarta de espinaca y ricota",
+          "imagen": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800",
+          "beneficios": "Rica en calcio, fibra y proteína vegetal"
+        },
+        {
+          "id": "noquis-batata-normal",
+          "nombre": "Ñoquis de batata con salsa liviana",
+          "imagen": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800",
+          "beneficios": "Carbohidratos de buena calidad y vitaminas A y C"
+        }
+      ],
+      "cenas": [
+        {
+          "id": "bife-pure-mixto-normal",
+          "nombre": "Bife con puré mixto y brócoli al vapor",
+          "imagen": "https://images.unsplash.com/photo-1676300185292-e23bb3db50fa?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "beneficios": "Proteína de alto valor biológico para recuperación muscular"
+        },
+        {
+          "id": "arroz-atun-huevo-normal",
+          "nombre": "Arroz integral con atún, huevo duro y vegetales",
+          "imagen": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800",
+          "beneficios": "Omega 3, hierro y energía sostenida"
+        },
+        {
+          "id": "pastel-carne-verduras-normal",
+          "nombre": "Pastel de carne y verduras al horno",
+          "imagen": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800",
+          "beneficios": "Alto en zinc, hierro y energía saludable"
+        }
+      ],
+      "colaciones": [
+        {
+          "id": "tostada-queso-banana-normal",
+          "nombre": "Tostada integral con queso y banana",
+          "imagen": "https://images.unsplash.com/photo-1592825775149-7601218da7e7?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        },
+        {
+          "id": "licuado-avena-durazno-normal",
+          "nombre": "Licuado de leche, avena y durazno",
+          "imagen": "https://images.unsplash.com/photo-1502741224143-90386d7f8c82?auto=format&fit=crop&w=800"
+        }
+      ]
+    },
+    "dia_partido": {
+      "desayunos": [
+        { "id": "panqueques-partido", "nombre": "Panqueques de avena y banana con yogur", "imagen": "https://images.unsplash.com/photo-1627226651296-e244911fd619?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fFBhbnF1ZXF1ZXMlMjBkZSUyMGF2ZW5hJTIweSUyMGJhbmFuYSUyMGNvbiUyMHlvZ3VyfGVufDB8fDB8fHww" },
+        { "id": "tostadas-palta-partido", "nombre": "Tostadas integrales con palta y huevo duro", "imagen": "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800" },
+        { "id": "licuado-banana-miel-partido", "nombre": "Licuado de leche + banana + avena + miel", "imagen": "https://images.unsplash.com/photo-1685967836529-b0e8d6938227?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TGljdWFkbyUyMGRlJTIwbGVjaGUlMjAlMkIlMjBiYW5hbmElMjAlMkIlMjBhdmVuYSUyMCUyQiUyMG1pZWx8ZW58MHx8MHx8fDA%3D" }
+      ],
+      "almuerzos": [
+        { "id": "pollo-arroz-partido", "nombre": "Pollo a la plancha con arroz y zanahoria", "imagen": "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=800" },
+        { "id": "arroz-pollo-vegetales-partido", "nombre": "Arroz con pollo y vegetales", "imagen": "https://images.unsplash.com/photo-1553621043-f47ddb639314?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8QXJyb3olMjBjb24lMjBwb2xsbyUyMHklMjB2ZWdldGFsZXN8ZW58MHx8MHx8fDA%3D" },
+        { "id": "tarta-espinaca-partido", "nombre": "Tarta de espinaca y ricota", "imagen": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800" },
+        { "id": "noquis-batata-partido", "nombre": "Ñoquis de batata con salsa liviana", "imagen": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800" }
+      ],
+      "cenas": [
+        { "id": "bife-pure-partido", "nombre": "Bife con puré mixto y brócoli", "imagen": "https://images.unsplash.com/photo-1676300185579-ed2b14891d82?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y2FybmUlMjBjb24lMjBwdXIlQzMlQTklMjBtaXh0byUyMHklMjBiciVDMyVCM2NvbGl8ZW58MHx8MHx8fDA%3D" },
+        { "id": "arroz-atun-partido", "nombre": "Arroz integral con atún y huevo duro", "imagen": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800" },
+        { "id": "pastel-carne-partido", "nombre": "Pastel de carne y verduras al horno", "imagen": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800" }
+      ],
+      "colaciones": [
+        { "id": "tostada-banana-partido", "nombre": "Tostada integral con queso y banana", "imagen": "https://images.unsplash.com/photo-1708989176988-7eaf552a4614?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fFRvc3RhZGElMjBpbnRlZ3JhbCUyMGNvbiUyMHF1ZXNvJTIweSUyMGJhbmFuYXxlbnwwfHwwfHx8MA%3D%3D" },
+        { "id": "licuado-durazno-partido", "nombre": "Licuado de leche, avena y durazno", "imagen": "https://images.unsplash.com/photo-1502741224143-90386d7f8c82?auto=format&fit=crop&w=800" }
+      ]
+    },
+    "dia_entrenamiento": {
+      "desayunos": [
+        {
+          "id": "desayuno-pre-entrenamiento-fuerte",
+          "nombre": "Desayuno pre-entrenamiento (Mañana)",
+          "imagen": "https://images.unsplash.com/photo-1517673400267-0251440c45dc?auto=format&fit=crop&w=800",
+          "ingredientes": ["Avena cocida con banana", "Yogur con frutillas", "Agua o jugo natural"]
+        },
+        {
+          "id": "colacion-liviana-entrenamiento",
+          "nombre": "Colación liviana (Media mañana)",
+          "imagen": "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800",
+          "ingredientes": ["Pan integral con palta y huevo", "Frutas secas", "Bebida isotónica"]
+        },
+        {
+          "id": "panqueques-banana-semillas-entrenamiento",
+          "nombre": "Panqueques de banana y semillas",
+          "imagen": "https://images.unsplash.com/photo-1604634077002-15dd4d5f1a33?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "preparacion": ["Pisá banana con huevos", "Agregar avena y semillas", "Cocinar en sartén"]
+        },
+        {
+          "id": "tostadas-palta-tomate-entrenamiento",
+          "nombre": "Tostadas integrales con palta, huevo y tomate",
+          "imagen": "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800"
+        }
+      ],
+      "almuerzos": [
+        {
+          "id": "milanesa-horno-pure-entrenamiento",
+          "nombre": "Milanesa de carne al horno con puré mixto",
+          "imagen": "https://images.unsplash.com/photo-1578824729463-1a35c90e9a62?q=80&w=1033&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "aporta": "Hierro, proteína y energía sostenida"
+        },
+        { "id": "arroz-pollo-entrenamiento", "nombre": "Arroz con pollo y vegetales", "imagen": "https://images.unsplash.com/photo-1628025114288-1693ac3bcac1?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+        { "id": "tarta-espinaca-entrenamiento", "nombre": "Tarta de espinaca y ricota", "imagen": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800" },
+        { "id": "noquis-batata-entrenamiento", "nombre": "Ñoquis de batata con salsa liviana", "imagen": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800" }
+      ],
+      "cenas": [
+        { "id": "bife-pure-entrenamiento", "nombre": "Bife con puré mixto y brócoli", "imagen": "https://images.unsplash.com/photo-1750113547630-7cf7cb0aec66?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+        { "id": "arroz-atun-entrenamiento", "nombre": "Arroz integral con atún y huevo duro", "imagen": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800" },
+        { "id": "pastel-carne-entrenamiento", "nombre": "Pastel de carne y verduras al horno", "imagen": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800" }
+      ],
+      "colaciones": [
+        { "id": "tostada-banana-entrenamiento", "nombre": "Tostada integral con queso y banana", "imagen": "https://plus.unsplash.com/premium_photo-1695151601919-0c2e6a34875c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8VG9zdGFkYSUyMGludGVncmFsJTIwY29uJTIwcXVlc28lMjB5JTIwYmFuYW5hfGVufDB8fDB8fHww" },
+        { "id": "licuado-durazno-entrenamiento", "nombre": "Licuado de leche, avena y durazno", "imagen": "https://images.unsplash.com/photo-1502741224143-90386d7f8c82?auto=format&fit=crop&w=800" }
+      ]
+    }
+  }
+}
